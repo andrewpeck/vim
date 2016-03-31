@@ -143,7 +143,7 @@ filetype plugin on
     " " bang (!) is required since we are overwriting the DiffText setting. The
     " highlighting
     " for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
-    highlight! link DiffText MatchParen
+    " highlight! link DiffText MatchParen
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Better Match Paren
