@@ -127,10 +127,13 @@ filetype plugin on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "git://github.com/godlygeek/tabular.git
-    nmap <silent> <Leader>T :Tabularize/\|<CR>
-    nmap <silent> <Leader>= :Tabularize/ = <CR>
-    nmap <silent> <Leader>/ :Tabularize/\/\/<CR>
-    nmap <silent> <Leader>( :Tabularize/(<CR>
+    map <silent> <Leader>T :Tabularize/\|<CR>
+    map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
+    map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
+    map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
+    "map <silent> <Leader>/ :Tabularize/\(^\s*\|\/\/.*\)\@<!\/\//l1<CR>
+    "map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR> 
+    map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vimdiff highlighting 
