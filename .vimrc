@@ -11,6 +11,7 @@ filetype plugin on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " scrolling offset
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
     set scrolloff=5
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -43,35 +44,35 @@ filetype plugin on
 " airline 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Enable the list of buffers
-    let g:airline#extensions#tabline#enabled = 1
+    " " Enable the list of buffers
+    " let g:airline#extensions#tabline#enabled = 1
 
-    " Show just the filename
-    let g:airline#extensions#tabline#fnamemod = ':t'
-    let g:airline_theme             = 'powerlineish'
-    let g:airline_powerline_fonts = 1
-    if !exists('g:airline_symbols')
-        let g:airline_symbols = {}
-    endif
+    " " Show just the filename
+    " let g:airline#extensions#tabline#fnamemod = ':t'
+    " let g:airline_theme             = 'powerlineish'
+    " let g:airline_powerline_fonts = 1
+    " if !exists('g:airline_symbols')
+    "     let g:airline_symbols = {}
+    " endif
 
-    set encoding=utf-8
-    " unicode symbols
-    let g:airline_left_sep = '»'
-    let g:airline_left_sep = '▶'
-    let g:airline_right_sep = '«'
-    let g:airline_right_sep = '◀'
-    let g:airline_symbols.linenr = '␊'
-    let g:airline_symbols.linenr = '␤'
-    let g:airline_symbols.linenr = '¶'
-    let g:airline_symbols.branch = '⎇'
-    let g:airline_symbols.paste = 'ρ'
-    let g:airline_symbols.paste = 'Þ'
-    let g:airline_symbols.paste = '∥'
-    let g:airline_symbols.whitespace = 'Ξ'
+    " set encoding=utf-8
+    " " unicode symbols
+    " let g:airline_left_sep = '»'
+    " let g:airline_left_sep = '▶'
+    " let g:airline_right_sep = '«'
+    " let g:airline_right_sep = '◀'
+    " let g:airline_symbols.linenr = '␊'
+    " let g:airline_symbols.linenr = '␤'
+    " let g:airline_symbols.linenr = '¶'
+    " let g:airline_symbols.branch = '⎇'
+    " let g:airline_symbols.paste = 'ρ'
+    " let g:airline_symbols.paste = 'Þ'
+    " let g:airline_symbols.paste = '∥'
+    " let g:airline_symbols.whitespace = 'Ξ'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntax Highlighting for Arduino .ino files
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" augroup HighlightingFileTypes
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     autocmd!
     autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
@@ -84,7 +85,8 @@ filetype plugin on
 
     "Delete trailing whitespace with <Leader>rtw
     nnoremap <Leader>rtw :%s/\s\+$//e<CR>
-    " Remove trailing whitespace on Save
+
+    " Remove trailing whitespace automatically on Save
     " augroup RemoveTrailingWhitespace
     "     autocmd BufWritePre *.cpp :%s/\s\+$//e
     "     autocmd BufWritePre *.hpp :%s/\s\+$//e
@@ -193,19 +195,27 @@ filetype plugin on
 " better line moving
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    nnoremap <A-Down> :m .+1<CR>==
-    nnoremap <A-Up> :m .-2<CR>==
-    inoremap <A-Down> <Esc>:m .+1<CR>==gi
-    inoremap <A-Up> <Esc>:m .-2<CR>==gi
-    vnoremap <A-Down> :m '>+1<CR>gv=gv
-    vnoremap <A-Up> :m '<-2<CR>gv=gv
+    nnoremap <A-Down>      :m .+1<CR>
+    nnoremap <A-Up>        :m .-2<CR>
+    inoremap <A-Down> <Esc>:m .+1<CR>gi
+    inoremap <A-Up>   <Esc>:m .-2<CR>gi
+    vnoremap <A-Down>      :m '>+1<CR>gv
+    vnoremap <A-Up>        :m '<-2<CR>gv
+
+    "nnoremap <A-Down>      :m .+1<CR>==
+    "nnoremap <A-Up>        :m .-2<CR>==
+    "inoremap <A-Down> <Esc>:m .+1<CR>==gi
+    "inoremap <A-Up>   <Esc>:m .-2<CR>==gi
+    "vnoremap <A-Down>      :m '>+1<CR>gv=gv
+    "vnoremap <A-Up>        :m '<-2<CR>gv=gv
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " undo
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     nnoremap <F5> :UndotreeToggle<cr>
-    nmap <silent> <Leader>u :UndotreeToggle<CR>
+
+    "nmap <silent> <Leader>u :UndotreeToggle<CR>
 
     set undofile
     set undodir=~/.vim/undodir
@@ -238,9 +248,16 @@ filetype plugin on
 
     syntax on
     set nocursorcolumn
-    set nocursorline
+    set cursorline
     syntax sync minlines=256
     set t_Co=256
+
+    highlight Cursor guifg=white guibg=black
+    highlight iCursor guifg=white guibg=steelblue
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=n-v-c:blinkon0
+    set guicursor+=i:blinkwait10
+    set guicursor+=i:ver25-iCursor
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " smaller hardcopy printed fonts
@@ -259,14 +276,20 @@ set backspace=eol,start,indent
 " Font
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    set gfn=Source\ Code\ Pro\ 10
-    "set guifont=Monospace\ 9
-    if hostname()=='arch'
-        set guifont=Source\ Code\ Pro\ 9
+    if hostname()=='zenbook'
+        " make the font a little bit bigger for the laptop
+        set guifont=Source\ Code\ Pro\ 11,Inconsolata\ 11
+    else
+        set guifont=Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 10
     endif
 
+    "set guifont=Monospace\ 9
+    "if hostname()=='arch'
+    "    set guifont=Source\ Code\ Pro\ 9
+    "else 
+    "endif
+
     "if has("unix")
-    "
     "    if hostname()=='zenbook'
     "        set guifont=Source\ Code\ Pro\ 10
     "    if hostname()=='ucla-cms-pc'
@@ -275,38 +298,37 @@ set backspace=eol,start,indent
     "        set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
     "    else
     "    endif
-    "
-    "    "backup all files to common folder
-    "    "set backup
-    "    "set backupdir=//home//andrew//.vim//backup
     "endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    if has("gui_running")
-        "syntax enable
-        "let g:solarized_italic=0    "default value is 1
-        "let g:solarized_contrast="low"    "default value is normal
-        "set background=dark
-        "colorscheme solarized
-        "colorscheme summerfruit256
-        set background=dark
-        colorscheme gruvbox
-        "set background=light
-        "colorscheme peachpuff 
-        "colorscheme desert256
-        "colorscheme github
-    else
-        set background=dark
-        colorscheme gruvbox
-        "set bg=dark
-        "let g:solarized_contrast="low"    "default value is normal
-        "colorscheme solarized
-        "colorscheme summerfruit256
-    endif
-    set nu!
+    silent! colorscheme gruvbox
+    set background=dark
+
+    " if has("gui_running")
+    "     silent! colorscheme gruvbox
+    "     set background=dark
+
+    "     "syntax enable
+    "     "let g:solarized_italic=0    "default value is 1
+    "     "let g:solarized_contrast="low"    "default value is normal
+    "     "set background=dark
+    "     "colorscheme solarized
+    "     "colorscheme summerfruit256
+    "     "set background=light
+    "     "colorscheme peachpuff 
+    "     "colorscheme desert256
+    "     "colorscheme github
+    " else
+    "     set background=dark
+    "     colorscheme gruvbox
+    "     "set bg=dark
+    "     "let g:solarized_contrast="low"    "default value is normal
+    "     "colorscheme solarized
+    "     "colorscheme summerfruit256
+    " endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " folding settings
@@ -321,14 +343,20 @@ set backspace=eol,start,indent
     " nnoremap <Tab> zo
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Verilog/C++ Comment Insertion
+" Comment Insertion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    let @m = "o//120A-121|Do// o//120A-121|DkA"
-    let @c = "o//120A-121|D"
-    "let @c = "yypR///v$r-"
-    nmap <silent> <Leader>C @m
-    nmap <silent> <Leader>c @c
+    " Kubic style comment insertion
+    autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <Leader>C o//<ESC>120A-<ESC>0121\|DyypO// <ESC>
+    autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <Leader>c o//<ESC>120A-<ESC>0121\|D
+
+    " Vimrc comment insertion
+    autocmd BufRead,BufNewFile *.vimrc           nmap <silent> <Leader>C o""<ESC>120A"<ESC>0121\|DyypO" <ESC>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  f6 to replace C++ comments with C-style comments
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " disable auto comment continuation
@@ -344,18 +372,25 @@ set backspace=eol,start,indent
     " LaTeX (rubber) macro for compiling
     "nnoremap <leader>c :w<CR>:!rubber --pdf --warn all %<CR>
     " View PDF macro; '%:r' is current file's root (base) name.
-    nnoremap <leader>v :!atril %:r.pdf &<CR><CR>
+    "nnoremap <leader>v :!atril %:r.pdf &<CR><CR>
 
-    let Tex_FoldedSections=""
-    let Tex_FoldedEnvironments=""
-    let Tex_FoldedMisc=""
-    let g:Tex_DefaultTargetFormat = 'pdf'
-    let g:latex_latexmk_options = '-pdf'
+    set grepprg=grep\ -nH\ $*
+
+    "let Tex_FoldedSections=""
+    "let Tex_FoldedEnvironments=""
+    "let Tex_FoldedMisc=""
+    "let g:Tex_DefaultTargetFormat = 'pdf'
+    "let g:latex_latexmk_options = '-pdf'
     "let g:Tex_CompileRule_pdf = 'latexmk -pdf'
     "let g:Tex_CompileRule_pdf = 'pdflatex -interactionmode=nonstop $*.tex'
-    let g:Tex_ViewRule_pdf = 'atril'
-    let g:tex_flavor = "latex"
-    let g:Tex_MultipleCompileFormats = "dvi,pdf"
+    "let g:Tex_ViewRule_pdf = 'zathura'
+    "let g:tex_flavor = "latex"
+    "let g:Tex_MultipleCompileFormats = "dvi,pdf"
+
+    let g:vimtex_view_method="zathura"
+	"let g:vimtex_view_general_viewer = 'okular'
+	"let g:vimtex_view_general_options = '--unique @pdf\#src:@line@tex'
+	"let g:vimtex_view_general_options_latexmk = '--unique'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Whitespace
@@ -383,19 +418,21 @@ set backspace=eol,start,indent
 " Spelling Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    "Turn on Spell check (us english)
-    setlocal spell spelllang=en_us
+    if has("spell")
+        "Turn on Spell check (us english)
+        setlocal spell spelllang=en_us
+        "highlight clear SpellBad
+        "highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline,bold
+        "highlight clear SpellCap
+        "highlight SpellCap term=underline cterm=underline
+        "highlight clear SpellRare
+        "highlight SpellRare term=underline cterm=underline
+        "highlight clear SpellLocal
+        "highlight SpellLocal term=underline cterm=underline
+        "nn :setlocal spell! spelllang=en_us
+        "imap :setlocal spell! spelllang=en_us
+    endif
 
-    "highlight clear SpellBad
-    "highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline,bold
-    "highlight clear SpellCap
-    "highlight SpellCap term=underline cterm=underline
-    "highlight clear SpellRare
-    "highlight SpellRare term=underline cterm=underline
-    "highlight clear SpellLocal
-    "highlight SpellLocal term=underline cterm=underline
-    "nn :setlocal spell! spelllang=en_us
-    "imap :setlocal spell! spelllang=en_us
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " window title 
@@ -424,6 +461,7 @@ set backspace=eol,start,indent
     set expandtab
     set shiftround " >> << keys move to multiple values of shiftwidth
 
+    " use width=2 tabs in verilog for Kubic-Kompatible-Kode
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -453,8 +491,6 @@ set backspace=eol,start,indent
 
     "let python_highlight_all = 1
 
-    "set grepprg=grep\ -nH\ $*
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " In insert mode, C-BS to delete previous word, and C-DEL to delete next
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -462,10 +498,12 @@ set backspace=eol,start,indent
     imap <C-BS> <C-W>
     imap <C-DEL> <ESC>ldei
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets F2 to enable and disable line numeration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+    set nu!
     nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -474,12 +512,11 @@ set backspace=eol,start,indent
 
     "Allows for <LEADER>+w to enable and disable soft word-wrapping
     "With word wrap turned on, the arrow keys correspond to gj gk
-    set nowrap
     "allowing us to move through visual lines
     noremap <silent> <Leader>w :call ToggleWrap()<CR>
     function ToggleWrap()
         if &wrap
-            echo "Wrap OFF"
+            "Wrap OFF"
             setlocal nowrap
             set virtualedit=all
             silent! nunmap <buffer> <Up>
@@ -490,11 +527,20 @@ set backspace=eol,start,indent
             silent! iunmap <buffer> <Down>
             silent! iunmap <buffer> <Home>
             silent! iunmap <buffer> <End>
+
+            silent! nunmap <buffer>  k 
+            silent! nunmap <buffer>  j
         else
-            echo "Wrap ON"
+            "Wrap ON"
             setlocal wrap linebreak nolist
-            set virtualedit=
-            setlocal display+=lastline
+
+            if !has("win32")
+                " stupid windows binary doesn't have breakindent
+                setlocal breakindent
+            endif
+
+            "set virtualedit=
+            "setlocal display+=lastline
             noremap  <buffer> <silent> <Up>   gk
             noremap  <buffer> <silent> <Down> gj
             noremap  <buffer> <silent> <Home> g<Home>
@@ -503,11 +549,14 @@ set backspace=eol,start,indent
             inoremap <buffer> <silent> <Down> <C-o>gj
             inoremap <buffer> <silent> <Home> <C-o>g<Home>
             inoremap <buffer> <silent> <End>  <C-o>g<End>
+
+            noremap  <buffer> <silent> k  gk
+            noremap  <buffer> <silent> j  gj
         endif
     endfunction
     "default to nowrap
     setlocal nowrap
-    set nolist
+    call ToggleWrap()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "parenthesis match options
@@ -558,28 +607,27 @@ set backspace=eol,start,indent
 
     if has("win32")
         let latex_view_general_viewer = "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
-        let Tlist_Ctags_Cmd = 'C:\Program Files (x86)\ctags58\ctags.exe'
+        let Tlist_Ctags_Cmd = 'C:\ctags.exe'
         set gfn=Consolas
     endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn off middle mouse paste
+" Turn off annoying middle mouse paste
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     map  <MiddleMouse> <Nop>
     imap <MiddleMouse> <Nop>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mouse block selection
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    noremap <M-LeftMouse> <4-LeftMouse>
+    noremap  <M-LeftMouse> <4-LeftMouse>
     inoremap <M-LeftMouse> <4-LeftMouse>
     onoremap <M-LeftMouse> <C-C><4-LeftMouse>
-    noremap <M-LeftDrag> <LeftDrag>
-    inoremap <M-LeftDrag> <LeftDrag>
-    onoremap <M-LeftDrag> <C-C><LeftDrag>
+    noremap  <M-LeftDrag>  <LeftDrag>
+    inoremap <M-LeftDrag>  <LeftDrag>
+    onoremap <M-LeftDrag>  <C-C><LeftDrag>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Change Backup File behavor
@@ -602,11 +650,13 @@ set backspace=eol,start,indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Add Underscore as Word Bounder
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 "set iskeyword-=_
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  Produce header guard when creating new header files
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 function! s:insert_gates()
   let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
   execute "normal! i#ifndef " . gatename
@@ -618,6 +668,52 @@ autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  f6 to replace C++ comments with C-style comments
+" Change splitting position
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
+
+set splitbelow
+set splitright
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Allow virtual highlighting in visual block mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set virtualedit=block
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" When joining lines, set a mark to return to afterwards
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap J mzJ`z
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Magic increment
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+function! Incr()
+  let a = line('.') - line("'<")
+  let c = virtcol("'<")
+  if a > 0
+    execute 'normal! '.c.'|'.a."\<C-a>"
+  endif
+  normal `<
+endfunction
+vnoremap <C-a> :call Incr()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Wrap at 120 characters, but don't insert stupid linebreaks
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"set tw=120
+set linebreak
+set nolist
+set wrapmargin=0
+set formatoptions-=t
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ergonomic remappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nmap <Space>v <C-v> 
+nmap <Space>f <C-f> 
+nmap <Space>b <C-b> 
