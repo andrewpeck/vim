@@ -24,9 +24,9 @@ filetype plugin on
     "hide the giant banner at the top of netrw
     let g:netrw_banner=0
     " hide gitignored files from netrw
-    if !has("win32")
-    let g:netrw_list_hide=netrw_gitignore#Hide()
-    endif
+    " if !has("win32")
+    " let g:netrw_list_hide=netrw_gitignore#Hide()
+    " endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " always show status line
@@ -280,7 +280,7 @@ set backspace=eol,start,indent
         " make the font a little bit bigger for the laptop
         set guifont=Source\ Code\ Pro\ 11,Inconsolata\ 11
     else
-        set guifont=Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 10
+        set guifont=Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 10
     endif
 
     "set guifont=Monospace\ 9
@@ -534,7 +534,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
             "Wrap ON"
             setlocal wrap linebreak nolist
 
-            if !has("win32")
+            if has("breakindent")
                 " stupid windows binary doesn't have breakindent
                 setlocal breakindent
             endif
