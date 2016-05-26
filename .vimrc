@@ -86,14 +86,14 @@ filetype plugin on
     "Delete trailing whitespace with <Leader>rtw
     nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
-    " Remove trailing whitespace automatically on Save
-    " augroup RemoveTrailingWhitespace
-    "     autocmd BufWritePre *.cpp :%s/\s\+$//e
-    "     autocmd BufWritePre *.hpp :%s/\s\+$//e
-    "     autocmd BufWritePre *.c   :%s/\s\+$//e
-    "     autocmd BufWritePre *.h   :%s/\s\+$//e
-    "     autocmd BufWritePre *.v   :%s/\s\+$//e
-    " augroup END
+    "Remove trailing whitespace automatically on Save
+    augroup RemoveTrailingWhitespace
+        autocmd BufWritePre *.cpp :%s/\s\+$//e
+        autocmd BufWritePre *.hpp :%s/\s\+$//e
+        autocmd BufWritePre *.c   :%s/\s\+$//e
+        autocmd BufWritePre *.h   :%s/\s\+$//e
+        autocmd BufWritePre *.v   :%s/\s\+$//e
+    augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Dont indent Access Specifiers in C++ 
