@@ -390,6 +390,9 @@ set backspace=eol,start,indent
     " Vimrc comment insertion
     autocmd BufRead,BufNewFile *.vimrc           nmap <silent> <Leader>C o""<ESC>120A"<ESC>0121\|DyypO" <ESC>
 
+    " VHDL Comment Insertion  Thomas Style
+    autocmd BufRead,BufNewFile *.vhdl,*.vhd      nmap <silent> <Leader>C o--<ESC>25a=<ESC>a--<ESC>yypO--==  ==--<ESC>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  f6 to replace C++ comments with C-style comments
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -501,6 +504,8 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
     " use width=2 tabs in verilog for Kubic-Kompatible-Kode
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Set title of window to file name
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -571,9 +576,11 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
             "Wrap ON"
             setlocal wrap linebreak nolist
 
-            if has("breakindent")
+            if !has("win32")
+            "if has("breakindent")
                 " stupid windows binary doesn't have breakindent
                 setlocal breakindent
+            "endif
             endif
 
             "set virtualedit=
@@ -591,6 +598,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
             noremap  <buffer> <silent> j  gj
         endif
     endfunction
+
     "default to nowrap
     setlocal nowrap
     call ToggleWrap()
