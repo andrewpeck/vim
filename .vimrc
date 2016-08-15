@@ -1,4 +1,70 @@
 set nocompatible
+
+filetype off " needed for vundle
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDtree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'scrooloose/nerdtree.git'
+nmap <silent> <Leader>n :NERDTreeToggle<CR>
+let g:NERDTreeWinSize = 40
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TagList 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'vim-scripts/taglist.vim'
+nmap <silent> <Leader>t :TlistToggle<CR>
+let g:Tlist_WinWidth = 60
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tabularize
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'godlygeek/tabular.git'
+map <silent> <Leader>T :Tabularize/\|<CR>
+map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
+map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
+map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
+"map <silent> <Leader>/ :Tabularize/\(^\s*\|\/\/.*\)\@<!\/\//l1<CR>
+"map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR> 
+map <silent> <Leader>[ :Tabularize/ [/l0<CR>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'scrooloose/syntastic'
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TPope
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plugin 'lervag/vimtex'
+Plugin 'mbbill/undotree'
+Plugin 'ervandew/supertab'
+Plugin 'morhetz/gruvbox'
+Plugin 'tpope/vim-surround'
+Plugin 'tmhedberg/matchit'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/a.vim'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" END VUNDLE 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 filetype plugin indent on
 filetype plugin on
 
@@ -34,11 +100,6 @@ filetype plugin on
 
     set laststatus=2
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" pathogen 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    call pathogen#infect()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline 
@@ -87,55 +148,32 @@ filetype plugin on
     nnoremap <Leader>rtw :%s/\s\+$//e<CR>
 
     "Remove trailing whitespace automatically on Save
-    augroup RemoveTrailingWhitespace
-        autocmd BufWritePre *.cpp :%s/\s\+$//e
-        autocmd BufWritePre *.hpp :%s/\s\+$//e
-        autocmd BufWritePre *.c   :%s/\s\+$//e
-        autocmd BufWritePre *.h   :%s/\s\+$//e
-        autocmd BufWritePre *.v   :%s/\s\+$//e
-    augroup END
+    "augroup RemoveTrailingWhitespace
+    "    autocmd BufWritePre *.cpp :%s/\s\+$//e
+    "    autocmd BufWritePre *.hpp :%s/\s\+$//e
+    "    autocmd BufWritePre *.c   :%s/\s\+$//e
+    "    autocmd BufWritePre *.h   :%s/\s\+$//e
+    "    "autocmd BufWritePre *.v   :%s/\s\+$//e
+    "augroup END
+
+    highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+
+    " Show trailing whitespace:
+    match ExtraWhitespace /\s\+$/
+
+    " Show trailing whitespace and spaces before a tab:
+    match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+    " Show tabs that are not at the start of a line:
+    match ExtraWhitespace /[^\t]\zs\t\+/
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Dont indent Access Specifiers in C++ 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     "set cinoptions+=g0
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDtree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    "https://github.com/scrooloose/nerdtree.git
-    "nmap <silent> <Leader>n :NERDTreeToggle<CR>
-    "let g:NERDTreeWinSize = 40
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ctrlP
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    "https://github.com/kien/ctrlp.vim.git
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TagList 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    "https://github.com/vim-scripts/taglist.vim.git
-    nmap <silent> <Leader>t :TlistToggle<CR>
-    let g:Tlist_WinWidth = 60
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tabularize
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    "git://github.com/godlygeek/tabular.git
-    map <silent> <Leader>T :Tabularize/\|<CR>
-    map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
-    map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
-    map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
-    "map <silent> <Leader>/ :Tabularize/\(^\s*\|\/\/.*\)\@<!\/\//l1<CR>
-    "map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR> 
-    map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vimdiff highlighting 
