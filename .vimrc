@@ -280,22 +280,6 @@ filetype plugin on
 
     set mouse=a
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Formatting
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    syntax on
-    set nocursorcolumn
-    set cursorline
-    syntax sync minlines=256
-    set t_Co=256
-
-    highlight Cursor guifg=white guibg=black
-    highlight iCursor guifg=white guibg=steelblue
-    set guicursor=n-v-c:block-Cursor
-    set guicursor+=n-v-c:blinkon0
-    set guicursor+=i:blinkwait10
-    set guicursor+=i:ver25-iCursor
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " smaller hardcopy printed fonts
@@ -316,9 +300,9 @@ set backspace=eol,start,indent
 
     if hostname()=='zenbook'
         " make the font a little bit bigger for the laptop
-        set guifont=Source\ Code\ Pro\ 11,Inconsolata\ 11
+        set guifont=Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Ubuntu\ Mono\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
     else
-        set guifont=Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 10
+        set guifont=Inconsolata-g\ 9,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
     endif
 
     "set guifont=Monospace\ 9
@@ -342,31 +326,46 @@ set backspace=eol,start,indent
 " Theme 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+    set background=light
+    silent! colorscheme peachpuff 
+    silent! colorscheme desert256
+    silent! colorscheme solarized
+    silent! colorscheme summerfruit256
+    silent! colorscheme github
     silent! colorscheme gruvbox
     set background=dark
 
-    " if has("gui_running")
-    "     silent! colorscheme gruvbox
-    "     set background=dark
 
+    " if has("gui_running")
     "     "syntax enable
     "     "let g:solarized_italic=0    "default value is 1
     "     "let g:solarized_contrast="low"    "default value is normal
     "     "set background=dark
-    "     "colorscheme solarized
-    "     "colorscheme summerfruit256
     "     "set background=light
-    "     "colorscheme peachpuff 
-    "     "colorscheme desert256
-    "     "colorscheme github
     " else
     "     set background=dark
-    "     colorscheme gruvbox
-    "     "set bg=dark
     "     "let g:solarized_contrast="low"    "default value is normal
-    "     "colorscheme solarized
-    "     "colorscheme summerfruit256
     " endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"Formatting
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    syntax on
+   "set nocursorcolumn
+    set cursorcolumn
+    set cursorline
+    hi CursorLine term=bold cterm=none
+    hi CursorColumn term=bold cterm=none
+    syntax sync minlines=256
+    set t_Co=256
+
+    highlight Cursor  guifg=white guibg=black
+    highlight iCursor guifg=white guibg=steelblue
+    set guicursor=n-v-c:block-Cursor
+    set guicursor+=n-v-c:blinkon0
+    set guicursor+=i:blinkwait10
+    set guicursor+=i:ver25-iCursor
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " folding settings
