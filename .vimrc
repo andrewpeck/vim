@@ -15,7 +15,7 @@ Plugin 'scrooloose/nerdtree.git'
 nmap <silent> <Leader>n :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 40
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TagList 
+" TagList
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'vim-scripts/taglist.vim'
 nmap <silent> <Leader>t :TlistToggle<CR>
@@ -29,7 +29,7 @@ map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
 map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
 map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
 "map <silent> <Leader>/ :Tabularize/\(^\s*\|\/\/.*\)\@<!\/\//l1<CR>
-"map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR> 
+"map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR>
 map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
@@ -60,7 +60,7 @@ Plugin 'tmhedberg/matchit'
 Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/a.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" END VUNDLE 
+" END VUNDLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -102,7 +102,7 @@ filetype plugin on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline 
+" airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     " " Enable the list of buffers
@@ -169,14 +169,14 @@ filetype plugin on
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Dont indent Access Specifiers in C++ 
+" Dont indent Access Specifiers in C++
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     "set cinoptions+=g0
 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vimdiff highlighting 
+" Vimdiff highlighting
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     " Fix the difficult-to-read default setting for diff text highlighting.  The
@@ -269,7 +269,7 @@ filetype plugin on
     "set tw=120
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" paste mode toggle 
+" paste mode toggle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     set pastetoggle=<F3>
@@ -308,7 +308,7 @@ set backspace=eol,start,indent
     "set guifont=Monospace\ 9
     "if hostname()=='arch'
     "    set guifont=Source\ Code\ Pro\ 9
-    "else 
+    "else
     "endif
 
     "if has("unix")
@@ -323,11 +323,11 @@ set backspace=eol,start,indent
     "endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Theme 
+" Theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     set background=light
-    silent! colorscheme peachpuff 
+    silent! colorscheme peachpuff
     silent! colorscheme desert256
     silent! colorscheme solarized
     silent! colorscheme summerfruit256
@@ -475,7 +475,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" window title 
+" window title
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     " This autocmd changes the window-local current directory to be the same as the
@@ -549,7 +549,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
     nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" better soft wrapping 
+" better soft wrapping
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "Allows for <LEADER>+w to enable and disable soft word-wrapping
@@ -570,7 +570,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
             silent! iunmap <buffer> <Home>
             silent! iunmap <buffer> <End>
 
-            silent! nunmap <buffer>  k 
+            silent! nunmap <buffer>  k
             silent! nunmap <buffer>  j
         else
             "Wrap ON"
@@ -686,7 +686,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
     if has("win32")
         set directory=c:\\vimtmp\\
         set backupdir=c:\\vimtmp\\
-    else 
+    else
         set directory=$HOME/.vim/tmp//
         set backupdir=$HOME/.vim/tmp//
     endif
@@ -759,9 +759,9 @@ set formatoptions-=t
 " ergonomic remappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nmap <Space>v <C-v> 
-nmap <Space>f <C-f> 
-nmap <Space>b <C-b> 
+nmap <Space>v <C-v>
+nmap <Space>f <C-f>
+nmap <Space>b <C-b>
 
 
 
@@ -769,10 +769,10 @@ nmap <Space>b <C-b>
 " Hidden Characters
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-highlight Invisible guifg=bg guibg=bg 
+highlight Invisible guifg=bg guibg=bg
 
 " hide ^M from line endings
 match Invisible /\r$/
 
-"match Ignore /\s\+$/        
+"match Ignore /\s\+$/
 
