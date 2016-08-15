@@ -762,3 +762,17 @@ set formatoptions-=t
 nmap <Space>v <C-v> 
 nmap <Space>f <C-f> 
 nmap <Space>b <C-b> 
+
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Hidden Characters
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+highlight Invisible guifg=bg guibg=bg 
+
+" hide ^M from line endings
+match Invisible /\r$/
+
+"match Ignore /\s\+$/        
+
