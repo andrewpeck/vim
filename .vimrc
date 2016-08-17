@@ -34,20 +34,22 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if (!hostname()=='ucla-cms-pc' && !has("win32"))
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'scrooloose/syntastic'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Plugin 'scrooloose/syntastic'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" 
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TPope
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -301,8 +303,12 @@ set backspace=eol,start,indent
     if hostname()=='zenbook'
         " make the font a little bit bigger for the laptop
         set guifont=Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Ubuntu\ Mono\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
-    else
-        set guifont=Inconsolata-g\ 9,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
+    elseif hostname()=='ucla-cms-pc'
+        set guifont=DejaVu\ Sans\ Mono\ 10
+    elseif hostname()=='arch'  
+        set guifont=Inconsolata-g\ 9,DejaVu\ Sans\ Mono\ 10,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
+    else 
+        set guifont=Monospace\ 9
     endif
 
     "set guifont=Monospace\ 9
@@ -576,7 +582,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
             "Wrap ON"
             setlocal wrap linebreak nolist
 
-            if !has("win32")
+            if (!hostname()=='ucla-cms-pc' && !has("win32"))
             "if has("breakindent")
                 " stupid windows binary doesn't have breakindent
                 setlocal breakindent
