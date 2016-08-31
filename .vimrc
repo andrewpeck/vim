@@ -606,7 +606,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
     endfunction
 
     "default to nowrap
-    setlocal nowrap
+    setlocal wrap
     call ToggleWrap()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
