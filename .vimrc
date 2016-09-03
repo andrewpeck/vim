@@ -34,7 +34,7 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if (!hostname()=='ucla-cms-pc' && !has("win32"))
+if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 endif
