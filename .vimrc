@@ -37,6 +37,7 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+map <silent> <Leader>f :YcmCompleter FixIt<CR>
 endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
@@ -60,7 +61,11 @@ Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-surround'
 Plugin 'tmhedberg/matchit'
 Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/ConflictMotions'
+Plugin 'vim-scripts/CountJump' " needed by ConflictMotions
+Plugin 'vim-scripts/ingo-library' " needed by ConflictMotions
 Plugin 'vim-scripts/a.vim'
+Plugin 'thirtythreeforty/lessspace.vim'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
