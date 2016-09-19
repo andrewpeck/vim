@@ -366,8 +366,9 @@ set backspace=eol,start,indent
    "set nocursorcolumn
     set cursorcolumn
     set cursorline
-    hi CursorLine term=bold cterm=none
-    hi CursorColumn term=bold cterm=none
+    hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+    hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+
     syntax sync minlines=256
     set t_Co=256
 
