@@ -21,6 +21,23 @@ Plugin 'vim-scripts/taglist.vim'
 nmap <silent> <Leader>t :TlistToggle<CR>
 let g:Tlist_WinWidth = 60
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Unite / Ctrl-P
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if (!(has("win32")))
+    Plugin 'Shougo/unite.vim'
+    Plugin 'Shougo/vimproc.vim'
+else
+    Plugin 'kien/ctrlp.vim'
+endif
+
+nnoremap <C-p> :Unite file_rec/async<cr>
+nnoremap <space>/ :Unite grep:.<cr>
+let g:unite_source_history_yank_enable = 1
+nnoremap <space>y :Unite history/yank<cr>
+nnoremap <space>s :Unite -quick-match buffer<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plugin 'godlygeek/tabular.git'
@@ -60,7 +77,6 @@ Plugin 'ervandew/supertab'
 Plugin 'morhetz/gruvbox'
 Plugin 'tpope/vim-surround'
 Plugin 'tmhedberg/matchit'
-Plugin 'kien/ctrlp.vim'
 Plugin 'vim-scripts/ConflictMotions'
 Plugin 'vim-scripts/CountJump' " needed by ConflictMotions
 Plugin 'vim-scripts/ingo-library' " needed by ConflictMotions
@@ -568,6 +584,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
     "With word wrap turned on, the arrow keys correspond to gj gk
     "allowing us to move through visual lines
     noremap <silent> <Leader>w :call ToggleWrap()<CR>
+
     function ToggleWrap()
         if &wrap
             "Wrap OFF"
@@ -589,10 +606,7 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
             setlocal wrap linebreak nolist
 
             if (!hostname()=='ucla-cms-pc' && !has("win32"))
-            "if has("breakindent")
-                " stupid windows binary doesn't have breakindent
                 setlocal breakindent
-            "endif
             endif
 
             "set virtualedit=
