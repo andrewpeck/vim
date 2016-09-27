@@ -1,46 +1,33 @@
 set nocompatible
 
 filetype off " needed for vundle
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDtree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'scrooloose/nerdtree.git'
-nmap <silent> <Leader>n :NERDTreeToggle<CR>
-let g:NERDTreeWinSize = 40
+" Plug 'scrooloose/nerdtree'
+" nmap <silent> <Leader>n :NERDTreeToggle<CR>
+" let g:NERDTreeWinSize = 40
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TagList
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'vim-scripts/taglist.vim'
+Plug 'vim-scripts/taglist.vim'
 nmap <silent> <Leader>t :TlistToggle<CR>
 let g:Tlist_WinWidth = 60
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Unite / Ctrl-P
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if (!(has("win32")))
-    Plugin 'Shougo/unite.vim'
-    Plugin 'Shougo/vimproc.vim'
-else
-    Plugin 'kien/ctrlp.vim'
-endif
-
-nnoremap <C-p> :Unite file_rec/async<cr>
-nnoremap <space>/ :Unite grep:.<cr>
-let g:unite_source_history_yank_enable = 1
-nnoremap <space>y :Unite history/yank<cr>
-nnoremap <space>s :Unite -quick-match buffer<cr>
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ctrl-P
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'ctrlpvim/ctrlp.vim'
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard | grep -v \.svn']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'godlygeek/tabular.git'
+Plug 'godlygeek/tabular'
 map <silent> <Leader>T :Tabularize/\|<CR>
 map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
 map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
@@ -48,18 +35,20 @@ map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
 "map <silent> <Leader>/ :Tabularize/\(^\s*\|\/\/.*\)\@<!\/\//l1<CR>
 "map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR>
 map <silent> <Leader>[ :Tabularize/ [/l0<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 map <silent> <Leader>f :YcmCompleter FixIt<CR>
 endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin 'scrooloose/syntastic'
+" Plug 'scrooloose/syntastic'
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
@@ -68,24 +57,27 @@ endif
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TPope
+" Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plugin 'lervag/vimtex'
-Plugin 'mbbill/undotree'
-Plugin 'ervandew/supertab'
-Plugin 'morhetz/gruvbox'
-Plugin 'tpope/vim-surround'
-Plugin 'tmhedberg/matchit'
-Plugin 'vim-scripts/ConflictMotions'
-Plugin 'vim-scripts/CountJump' " needed by ConflictMotions
-Plugin 'vim-scripts/ingo-library' " needed by ConflictMotions
-Plugin 'vim-scripts/a.vim'
-Plugin 'thirtythreeforty/lessspace.vim'
+"Plug 'gko/vim-coloresque'
+Plug 'lervag/vimtex'
+Plug 'mbbill/undotree'
+Plug 'ervandew/supertab'
+Plug 'morhetz/gruvbox'
+Plug 'tpope/vim-surround'
+Plug 'tmhedberg/matchit'
+Plug 'vim-scripts/ConflictMotions'
+Plug 'vim-scripts/CountJump' " needed by ConflictMotions
+Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
+Plug 'vim-scripts/a.vim'
+Plug 'thirtythreeforty/lessspace.vim'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
 
 filetype plugin indent on
@@ -626,7 +618,6 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
     endfunction
 
     "default to nowrap
-    setlocal wrap
     call ToggleWrap()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
