@@ -271,7 +271,7 @@ filetype plugin on
     "nmap <silent> <Leader>u :UndotreeToggle<CR>
 
     set undofile
-    set undodir=~/.vim/undodir
+    set undodir=~/Dropbox/.vim/undodir
 
     set history=2000
     set undolevels=2000
