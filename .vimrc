@@ -2,7 +2,11 @@ set nocompatible
 
 filetype off " needed for vundle
 
-call plug#begin()
+"if (has("win32"))
+"    call plug#begin(~/vimfiles/plugged)
+"else
+    call plug#begin()
+"endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDtree
