@@ -39,12 +39,12 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
-Plug 'Valloric/YouCompleteMe'
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-map <silent> <Leader>f :YcmCompleter FixIt<CR>
-endif
-
+"if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
+"Plug 'Valloric/YouCompleteMe'
+"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+"map <silent> <Leader>f :YcmCompleter FixIt<CR>
+"endif
+"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -59,28 +59,36 @@ endif
 " let g:syntastic_check_on_wq = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Conflict Motions
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+Plug 'vim-scripts/ConflictMotions'
+Plug 'vim-scripts/CountJump' " needed by ConflictMotions
+Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Plug 'gko/vim-coloresque'
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
 Plug 'ervandew/supertab'
-Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
-Plug 'vim-scripts/ConflictMotions'
-Plug 'vim-scripts/CountJump' " needed by ConflictMotions
-Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 Plug 'vim-scripts/a.vim'
 Plug 'thirtythreeforty/lessspace.vim'
+Plug 'metakirby5/codi.vim'
+
+" Color schemes
+Plug 'morhetz/gruvbox'
+Plug 'dmcgrady/vim-lucario'
+Plug 'dracula/vim'
+Plug 'NLKNguyen/papercolor-theme'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#end()            " required
+call plug#end()           
 filetype plugin indent on    " required
-
-filetype plugin indent on
 filetype plugin on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,19 +225,15 @@ filetype plugin on
 "better tab navigation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    nnoremap <C-Tab>    :tabnext<CR>
-    nnoremap <C-S-Tab>  :tabprevious<CR>
-    ""nnoremap <C-A-t>    :tabnew<CR>
-    inoremap <A-Left>   <Esc>:tabprevious<CR>i
-    inoremap <A-Right>  <Esc>:tabnext<CR>i
+    " new tab
+    nnoremap <C-A-t>         :tabnew<CR>
     inoremap <C-A-t>    <Esc>:tabnew<CR>
-    nnoremap <D-Left>   :tabprevious<CR>
-    nnoremap <D-Right>  :tabnext<CR>
-    nnoremap <C-A-t>    :tabnew<CR>
-    "nnoremap <C-S-t>    :tabnew<CR>
-    inoremap <A-Left>   <Esc>:tabprevious<CR>i
-    inoremap <A-Right>  <Esc>:tabnext<CR>i
-    inoremap <C-A-t>    <Esc>:tabnew<CR>
+
+    " tab next/prev
+    inoremap <C-Tab>>>  <Esc>:tabnext<CR>i
+    nnoremap <C-Tab>         :tabnext<CR>
+    inoremap <C-S-Tab>  <Esc>:tabprevious<CR>i
+    nnoremap <C-S-Tab>       :tabprevious<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Change maximum number of tabs
@@ -315,7 +319,8 @@ set backspace=eol,start,indent
 
     if hostname()=='zenbook'
         " make the font a little bit bigger for the laptop
-        set guifont=Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Ubuntu\ Mono\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
+        set guifont=Ubuntu\ Mono\ 13
+        ",Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
     elseif hostname()=='ucla-cms-pc'
         set guifont=DejaVu\ Sans\ Mono\ 10
     elseif hostname()=='arch'  
@@ -345,13 +350,15 @@ set backspace=eol,start,indent
 " Theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    set background=light
+    "set background=light
+    set background=dark
     silent! colorscheme peachpuff
     silent! colorscheme desert256
     silent! colorscheme solarized
     silent! colorscheme summerfruit256
     silent! colorscheme github
     silent! colorscheme gruvbox
+    silent! colorscheme PaperColor
     set background=dark
 
 
@@ -378,7 +385,7 @@ set backspace=eol,start,indent
     hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
 
     syntax sync minlines=256
-    set t_Co=256
+    "set t_Co=256
 
     highlight Cursor  guifg=white guibg=black
     highlight iCursor guifg=white guibg=steelblue
