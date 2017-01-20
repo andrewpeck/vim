@@ -113,6 +113,7 @@ call plug#end()
 filetype plugin indent on    " required
 filetype plugin on
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better $ matching
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -267,6 +268,8 @@ filetype plugin on
 "easier manual indentation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+    " rehighlight the same block of characters after indenting
+
     vnoremap > >gv
     vnoremap < <gv
 
@@ -274,12 +277,20 @@ filetype plugin on
 " better line moving
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
     nnoremap <A-Down>      :m .+1<CR>
     nnoremap <A-Up>        :m .-2<CR>
     inoremap <A-Down> <Esc>:m .+1<CR>gi
     inoremap <A-Up>   <Esc>:m .-2<CR>gi
     vnoremap <A-Down>      :m '>+1<CR>gv
     vnoremap <A-Up>        :m '<-2<CR>gv
+
+    nnoremap <M-Down>      :m .+1<CR>
+    nnoremap <M-Up>        :m .-2<CR>
+    inoremap <M-Down> <Esc>:m .+1<CR>gi
+    inoremap <M-Up>   <Esc>:m .-2<CR>gi
+    vnoremap <M-Down>      :m '>+1<CR>gv
+    vnoremap <M-Up>        :m '<-2<CR>gv
 
     "nnoremap <A-Down>      :m .+1<CR>==
     "nnoremap <A-Up>        :m .-2<CR>==
@@ -351,23 +362,6 @@ set backspace=eol,start,indent
         set guifont=Monospace\ 9
     endif
 
-    "set guifont=Monospace\ 9
-    "if hostname()=='arch'
-    "    set guifont=Source\ Code\ Pro\ 9
-    "else
-    "endif
-
-    "if has("unix")
-    "    if hostname()=='zenbook'
-    "        set guifont=Source\ Code\ Pro\ 10
-    "    if hostname()=='ucla-cms-pc'
-    "        set guifont=Source\ Code\ Pro\ 9
-    "    elseif hostname()=='arch'
-    "        set guifont=Source\ Code\ Pro\ for\ Powerline\ 9
-    "    else
-    "    endif
-    "endif
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -379,8 +373,8 @@ set backspace=eol,start,indent
     silent! colorscheme solarized
     silent! colorscheme summerfruit256
     silent! colorscheme github
-    silent! colorscheme gruvbox
     silent! colorscheme PaperColor
+    silent! colorscheme gruvbox
     set background=dark
 
 
@@ -420,10 +414,11 @@ set backspace=eol,start,indent
 " folding settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    set foldmethod=indent     "fold based on indent
-    set foldnestmax=4       "deepest fold is 10 levels
-    set nofoldenable       "dont fold by default
-    set foldlevel=99        "this is just what i use
+    set foldmethod=indent " fold based on indent
+    set foldnestmax=4     " deepest fold is 10 levels
+    set nofoldenable      " dont fold by default
+    set foldlevel=99      " this is just what i use
+
     " <2-LeftMouse>     Open fold, or select word or % match.
     nnoremap <expr> <2-LeftMouse> foldclosed(line('.')) == -1 ? "\<2-LeftMouse>" : 'zo'
     " nnoremap <Tab> zo
@@ -432,12 +427,12 @@ set backspace=eol,start,indent
 " Comment Insertion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Kubic style comment insertion
+    " Kubic style comment insertion for C family and Verilog
     autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <Leader>C o//<ESC>120A-<ESC>0121\|DyypO// <ESC>
     autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <Leader>c o//<ESC>120A-<ESC>0121\|D
 
     " Vimrc comment insertion
-    autocmd BufRead,BufNewFile *.vimrc           nmap <silent> <Leader>C o""<ESC>120A"<ESC>0121\|DyypO" <ESC>
+    autocmd BufRead,BufNewFile *.vimrc           nmap <silent> <Leader>C o<ESC>0i""<ESC>120A"<ESC>0121\|DyypO" <ESC>
 
     " VHDL Comment Insertion  Thomas Style
     autocmd BufRead,BufNewFile *.vhdl,*.vhd      nmap <silent> <Leader>C o--<ESC>25a=<ESC>a--<ESC>yypO--==  ==--<ESC>
@@ -445,7 +440,7 @@ set backspace=eol,start,indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "  f6 to replace C++ comments with C-style comments
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
+    map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " disable auto comment continuation
@@ -552,8 +547,6 @@ map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
 
     " use width=2 tabs in verilog for Kubic-Kompatible-Kode
     autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2
-
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Set title of window to file name
@@ -808,7 +801,6 @@ set formatoptions-=t
 nmap <Space>v <C-v>
 nmap <Space>f <C-f>
 nmap <Space>b <C-b>
-
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
