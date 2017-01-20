@@ -1,8 +1,17 @@
 set nocompatible
 
+if has("gui_macvim")
+	let macvim_skip_cmd_opt_movement = 1
+endif
+
+
 filetype off " needed for vundle
 
+imap jk <Esc>
+
 "if (has("win32"))
+
+
 "    call plug#begin(~/vimfiles/plugged)
 "else
     call plug#begin()
