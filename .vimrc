@@ -81,7 +81,11 @@ Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Plug 'gko/vim-coloresque'
+
+"Plug 'rhysd/vim-gfm-syntax'
+Plug 'plasticboy/vim-markdown'
+
+
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
 Plug 'ervandew/supertab'
@@ -90,6 +94,11 @@ Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/a.vim'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'metakirby5/codi.vim'
+
+" Marked is OSX Only
+if system('uname -s') == "Darwin\n"
+Plug 'itspriddle/vim-marked'
+endif
 
 " Color schemes
 Plug 'morhetz/gruvbox'
@@ -813,3 +822,38 @@ match Invisible /\r$/
 
 "match Ignore /\s\+$/
 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Autoread
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+set autoread
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Markdown
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if system('uname -s') == "Darwin\n"
+    autocmd BufRead,FileReadPost *.md :MarkedOpen
+else
+
+endif
+
+let g:vim_markdown_fenced_languages = ['cpp', 'ruby', 'json', 'verilog']
+autocmd ColorScheme * highlight link githubFlavoredMarkdownCode CursorLine
+
+"augroup markdown
+"    " Markdown (no need for modula2 :)
+"    autocmd BufRead,BufNewFile *.md set filetype=markdown
+"
+"
+"    autocmd FileType markdown set wrap linebreak nolist
+"    autocmd FileType markdown set textwidth=0
+"    autocmd FileType markdown set wrapmargin=0
+"    autocmd FileType markdown nmap <leader>m :silent !open %<CR>
+"    " http://vim.wikia.com/wiki/All_folds_open_when_opening_a_file
+"    " http://stackoverflow.com/questions/5074191/vim-fold-top-level-folds-only
+"    autocmd FileType markdown normal %foldc
+"augroup END
