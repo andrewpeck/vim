@@ -1,13 +1,21 @@
+" buffer-variable    b:    Local to the current buffer.
+" window-variable    w:    Local to the current window.
+" tabpage-variable   t:    Local to the current tab page.
+" global-variable    g:    Global.
+" local-variable     l:    Local to a function.
+" script-variable    s:    Local to a |:source|'ed Vim script.
+" function-argument  a:    Function argument (only inside a function).
+" vim-variable       v:    Global, predefined by Vim.
+
+
 set nocompatible
 
 if has("gui_macvim")
-	let macvim_skip_cmd_opt_movement = 1
+    let macvim_skip_cmd_opt_movement = 1
 endif
 
 
 filetype off " needed for vundle
-
-imap jk <Esc>
 
 "if (has("win32"))
 
@@ -16,6 +24,7 @@ imap jk <Esc>
 "else
     call plug#begin()
 "endif
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDtree
@@ -41,10 +50,10 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 " Tabularize
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'godlygeek/tabular'
-map <silent> <Leader>T :Tabularize/\|<CR>
 map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
 map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
 map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
+map <silent> <Leader>T :Tabularize/\ \| <CR>
 "map <silent> <Leader>/ :Tabularize/\(^\s*\|\/\/.*\)\@<!\/\//l1<CR>
 "map <silent> <Leader>/ :Tabularize/[^\/\/]\/\//l1<CR>
 map <silent> <Leader>[ :Tabularize/ [/l0<CR>
@@ -65,7 +74,7 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
-" 
+"
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
@@ -82,9 +91,7 @@ Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-"Plug 'rhysd/vim-gfm-syntax'
-Plug 'plasticboy/vim-markdown'
-
+Plug 'gabrielelana/vim-markdown'
 
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
@@ -94,6 +101,11 @@ Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/a.vim'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'metakirby5/codi.vim'
+Plug 'vhda/verilog_systemverilog.vim'
+
+let g:lessspace_enabled = 1
+
+Plug 'w0rp/ale'
 
 " Marked is OSX Only
 if system('uname -s') == "Darwin\n"
@@ -105,11 +117,12 @@ Plug 'morhetz/gruvbox'
 Plug 'dmcgrady/vim-lucario'
 Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'junegunn/seoul256.vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#end()           
+call plug#end()
 filetype plugin indent on    " required
 filetype plugin on
 
@@ -178,28 +191,31 @@ filetype plugin on
     " let g:airline_symbols.whitespace = 'Ξ'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Syntax Highlighting for Arduino .ino files
+" C++ Syntax Highlighting for Arduino .ino files
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    autocmd!
-    autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
-    autocmd BufNewFile,BufReadPost *.inc       set filetype=cpp
+    augroup arduino
+        autocmd!
+        autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
     augroup END
+
+    autocmd BufNewFile,BufReadPost *.inc       set filetype=cpp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " trailing whitespace
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "Delete trailing whitespace with <Leader>rtw
-    nnoremap <Leader>rtw :%s/\s\+$//e<CR>
+    nnoremap <Leader>rtw mz:%s/\s\+$//e<CR>`z
 
     "Remove trailing whitespace automatically on Save
     "augroup RemoveTrailingWhitespace
+    "    autocmd!
     "    autocmd BufWritePre *.cpp :%s/\s\+$//e
     "    autocmd BufWritePre *.hpp :%s/\s\+$//e
     "    autocmd BufWritePre *.c   :%s/\s\+$//e
     "    autocmd BufWritePre *.h   :%s/\s\+$//e
-    "    "autocmd BufWritePre *.v   :%s/\s\+$//e
+    "   "autocmd BufWritePre *.v   :%s/\s\+$//e
     "augroup END
 
     highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
@@ -277,8 +293,7 @@ filetype plugin on
 " better line moving
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
-    nnoremap <A-Down>      :m .+1<CR>
+    nnoremap <A-Down>      :m .+1<CR
     nnoremap <A-Up>        :m .-2<CR>
     inoremap <A-Down> <Esc>:m .+1<CR>gi
     inoremap <A-Up>   <Esc>:m .-2<CR>gi
@@ -356,9 +371,12 @@ set backspace=eol,start,indent
         ",Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
     elseif hostname()=='ucla-cms-pc'
         set guifont=DejaVu\ Sans\ Mono\ 10
-    elseif hostname()=='arch'  
+    elseif hostname()=='arch'
         set guifont=Inconsolata-g\ 9,DejaVu\ Sans\ Mono\ 10,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
-    else 
+    elseif system('uname -s') == "Darwin\n"
+        "set noantialias
+        set guifont=Monaco:h14
+    else
         set guifont=Monospace\ 9
     endif
 
@@ -366,17 +384,21 @@ set backspace=eol,start,indent
 " Theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    "set background=light
-    set background=dark
     silent! colorscheme peachpuff
     silent! colorscheme desert256
     silent! colorscheme solarized
-    silent! colorscheme summerfruit256
     silent! colorscheme github
-    silent! colorscheme PaperColor
-    silent! colorscheme gruvbox
-    set background=dark
+    "silent! colorscheme PaperColor
 
+    "set background=dark
+    "silent! colorscheme gruvbox
+    "let g:gruvbox_contrast_dark="soft"
+
+    set background=light
+    silent! colorscheme summerfruit256
+
+    "set background=dark
+    "set background=light
 
     " if has("gui_running")
     "     "syntax enable
@@ -397,14 +419,23 @@ set backspace=eol,start,indent
    "set nocursorcolumn
     set cursorcolumn
     set cursorline
-    hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
-    hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+
+    "gruvbox
+    if (g:colors_name=="gruvbox")
+        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+    elseif (g:colors_name=="summerfruit256")
+        "summerfruit
+        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=#F4F4F4
+        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=#F4F4F4
+    endif
 
     syntax sync minlines=256
     "set t_Co=256
 
     highlight Cursor  guifg=white guibg=black
-    highlight iCursor guifg=white guibg=steelblue
+    highlight iCursor guifg=white guibg=black
+    "highlight iCursor guifg=white guibg=steelblue " steelblue was nice on gruvbox
     set guicursor=n-v-c:block-Cursor
     set guicursor+=n-v-c:blinkon0
     set guicursor+=i:blinkwait10
@@ -427,26 +458,30 @@ set backspace=eol,start,indent
 " Comment Insertion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Kubic style comment insertion for C family and Verilog
-    autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <Leader>C o//<ESC>120A-<ESC>0121\|DyypO// <ESC>
-    autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <Leader>c o//<ESC>120A-<ESC>0121\|D
+    augroup commentinsertion
+        autocmd!
 
-    " Vimrc comment insertion
-    autocmd BufRead,BufNewFile *.vimrc           nmap <silent> <Leader>C o<ESC>0i""<ESC>120A"<ESC>0121\|DyypO" <ESC>
+        " Kubic style comment insertion for C family and Verilog
+        autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <buffer> <leader>C o//<ESC>120A-<ESC>0121\|DyypO// <ESC>
+        autocmd BufRead,BufNewFile *.c,*.cpp,*.h,*.v nmap <silent> <buffer> <leader>c o//<ESC>120A-<ESC>0121\|D0w
 
-    " VHDL Comment Insertion  Thomas Style
-    autocmd BufRead,BufNewFile *.vhdl,*.vhd      nmap <silent> <Leader>C o--<ESC>25a=<ESC>a--<ESC>yypO--==  ==--<ESC>
+        " Vimrc comment insertion
+        autocmd BufRead,BufNewFile *.vimrc           nmap <silent> <buffer> <leader>C o<ESC>0i""<ESC>120A"<ESC>0121\|DyypO" <ESC>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  f6 to replace C++ comments with C-style comments
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
+        " VHDL Comment Insertion  Thomas Style
+        autocmd BufRead,BufNewFile *.vhdl,*.vhd      nmap <silent> <buffer> <leader>C o--<ESC>25a=<ESC>a--<ESC>yypO--==  ==--<ESC>
+
+        autocmd BufRead,BufNewFile cpp,c,verilog     map <F6> k/\/\/<CR>xxi/* <Esc>:silent .,.s/\/\*  /\/\* /<Esc>A */<Esc>
+    augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " disable auto comment continuation
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+augroup commentcontinuation
+    autocmd!
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LaTeX
@@ -471,10 +506,51 @@ set backspace=eol,start,indent
     "let g:tex_flavor = "latex"
     "let g:Tex_MultipleCompileFormats = "dvi,pdf"
 
-    let g:vimtex_view_method="zathura"
-	"let g:vimtex_view_general_viewer = 'okular'
-	"let g:vimtex_view_general_options = '--unique @pdf\#src:@line@tex'
-	"let g:vimtex_view_general_options_latexmk = '--unique'
+    if (system('uname -s') == "Darwin\n")
+        " Change default target to pdf, if not dvi is used
+        let g:Tex_DefaultTargetFormat = 'pdf'
+
+        " Setup the compile rule for pdf to use pdflatex with synctex enabled
+        let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+
+        " PDF display rule
+        let g:Tex_ViewRule_pdf = 'open -a Skim'
+
+        map ,ll <leader>ll
+
+        " ,ls to forward search
+        map <leader>ls :w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline -r <C-r>=line('.')<CR> %<.pdf %<CR><CR>
+
+        " ,lv to display pdf
+        map ,lv <leader>lv
+
+"        let g:vimtex_view_general_viewer
+"                    \ = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+"         let g:vimtex_view_general_options = '-r @line @pdf @tex'
+"         let g:Tex_DefaultTargetFormat = 'pdf'
+""
+""        let g:Tex_CompileRule_dvi = 'latex --interaction=nonstopmode $*'
+""        let g:Tex_CompileRule_ps = 'dvips -Pwww -o $*.ps $*.dvi'
+""        let g:Tex_CompileRule_pspdf = 'ps2pdf $*.ps'
+""        let g:Tex_CompileRule_dvipdf = 'dvipdfm $*.dvi'
+"         let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+"
+""        let g:Tex_ViewRule_dvi = 'texniscope'
+""        let g:Tex_ViewRule_ps = 'Preview'
+"        let g:Tex_ViewRule_pdf = 'Skim'
+"
+""        let g:Tex_FormatDependency_ps  = 'dvi,ps'
+""        let g:Tex_FormatDependency_pspdf = 'dvi,ps,pspdf'
+""        let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
+    elseif (has("win32"))
+        let g:vimtex_view_method = "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
+    else
+        let g:vimtex_view_method="zathura"
+    endif
+
+    "let g:vimtex_view_general_viewer = 'okular'
+    "let g:vimtex_view_general_options = '--unique @pdf\#src:@line@tex'
+    "let g:vimtex_view_general_options_latexmk = '--unique'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Whitespace
@@ -482,21 +558,26 @@ set backspace=eol,start,indent
 
     noremap <Leader>wn :call WhiteSpace()<CR>
 
-    "match MaybeExtraWhitespace /\s\+\%#\@<!$/
-    "au InsertEnter * match MaybeExtraWhitespace /\s\+\%#\@<!$/
-    "au InsertLeave * match MaybeExtraWhitespace /\s\+\%#\@<!$/
-    "
-    "function! WhiteSpace()
-    "	if s:hilightws
-    "		highlight link MaybeExtraWhitespace NONE
-    "		let s:hilightws = 0
-    "		echo "Whitespace Highlighting On"
-    "	else
-    "		highlight link MaybeExtraWhitespace ExtraWhitespace
-    "		let s:hilightws = 1
-    "		echo "Whitespace Highlighting Off"
-    "	endif
-    "endfunction
+    hi ExtraWhitespace cterm=NONE ctermbg=green ctermfg=green guibg=green guifg=green
+    hi link MaybeExtraWhitespace ExtraWhitespace
+
+    match MaybeExtraWhitespace /\s\+\%#\@<!$/
+    au InsertEnter * match MaybeExtraWhitespace /\s\+\%#\@<!$/
+    au InsertLeave * match MaybeExtraWhitespace /\s\+\%#\@<!$/
+
+    let g:hilightws = 1
+
+    function! WhiteSpace()
+        if g:hilightws
+            highlight link MaybeExtraWhitespace NONE
+            let g:hilightws = 0
+            echo "Whitespace Highlighting On"
+        else
+            highlight link MaybeExtraWhitespace ExtraWhitespace
+            let g:hilightws = 1
+            echo "Whitespace Highlighting Off"
+        endif
+    endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Spelling Settings
@@ -531,6 +612,7 @@ set backspace=eol,start,indent
     " is no easy way to test for this autocmd in a script like there is for the
     " 'autochdir' option.
     augroup WindowName
+        autocmd!
         autocmd BufEnter * silent! lcd %:p:h
     augroup END
 
@@ -545,8 +627,14 @@ set backspace=eol,start,indent
     set expandtab
     set shiftround " >> << keys move to multiple values of shiftwidth
 
-    " use width=2 tabs in verilog for Kubic-Kompatible-Kode
-    autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    augroup verilog
+
+        autocmd!
+        autocmd BufNewFile,BufReadPost *.v set filetype=verilog
+
+        " use width=2 tabs in verilog for Kubic-Kompatible-Kode
+        autocmd FileType verilog setlocal tabstop=2 softtabstop=2 shiftwidth=2
+    augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Set title of window to file name
@@ -599,8 +687,12 @@ set backspace=eol,start,indent
     "allowing us to move through visual lines
     noremap <silent> <Leader>w :call ToggleWrap()<CR>
 
+    let g:softwrap = 0
+
     function ToggleWrap()
-        if &wrap
+        if g:softwrap
+            let g:softwrap=0
+            echo "Disabling Softwrapping"
             "Wrap OFF"
             setlocal nowrap
             set virtualedit=all
@@ -616,7 +708,9 @@ set backspace=eol,start,indent
             silent! nunmap <buffer>  k
             silent! nunmap <buffer>  j
         else
+            let g:softwrap=1
             "Wrap ON"
+            echo "Enabling Softwrapping"
             setlocal wrap linebreak nolist
 
             if (!hostname()=='ucla-cms-pc' && !has("win32"))
@@ -627,10 +721,11 @@ set backspace=eol,start,indent
             "setlocal display+=lastline
             noremap  <buffer> <silent> <Up>   gk
             noremap  <buffer> <silent> <Down> gj
-            noremap  <buffer> <silent> <Home> g<Home>
-            noremap  <buffer> <silent> <End>  g<End>
             inoremap <buffer> <silent> <Up>   <C-o>gk
             inoremap <buffer> <silent> <Down> <C-o>gj
+
+            noremap  <buffer> <silent> <Home> g<Home>
+            noremap  <buffer> <silent> <End>  g<End>
             inoremap <buffer> <silent> <Home> <C-o>g<Home>
             inoremap <buffer> <silent> <End>  <C-o>g<End>
 
@@ -638,9 +733,6 @@ set backspace=eol,start,indent
             noremap  <buffer> <silent> j  gj
         endif
     endfunction
-
-    "default to nowrap
-    call ToggleWrap()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "parenthesis match options
@@ -671,7 +763,7 @@ set backspace=eol,start,indent
 " have ctags look in higher directories
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    :set tags=./tags,./../tags,./../../tags,./../../../tags,tags
+    :set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../tags,tags
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " turn on ruler
@@ -690,8 +782,7 @@ set backspace=eol,start,indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     if has("win32")
-        let latex_view_general_viewer = "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
-        let Tlist_Ctags_Cmd = 'C:\ctags.exe'
+        //let Tlist_Ctags_Cmd = 'C:\ctags.exe'
         set gfn=Consolas
     endif
 
@@ -748,7 +839,16 @@ function! s:insert_gates()
   execute "normal! Go#endif /* " . gatename . " */"
   normal! kk
 endfunction
-autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+"When executing the map command, Vim will replace "<SID>" with the special
+"key code <SNR>, followed by a number that's unique for the script, and an
+"underscore.  Example:
+"    :map <SID>Add
+"could define a mapping "<SNR>23_Add".
+
+augroup insertgates
+    autocmd!
+    autocmd BufNewFile *.{h,hpp} call <SID>insert_gates()
+augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -827,18 +927,21 @@ set autoread
 " Markdown
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+
 if system('uname -s') == "Darwin\n"
-    autocmd BufRead,FileReadPost *.md :MarkedOpen
+    autocmd BufNewFile,BufRead,FileReadPost *.md :MarkedOpen
+    "autocmd BufNewFile,BufRead,FileReadPost *.md :set background=light
+    "autocmd BufNewFile,BufRead,FileReadPost *.md :colorscheme PaperColor
 else
 
 endif
 
-let g:vim_markdown_fenced_languages = ['cpp', 'ruby', 'json', 'verilog']
-autocmd ColorScheme * highlight link githubFlavoredMarkdownCode CursorLine
+" let g:vim_markdown_fenced_languages = ['cpp', 'ruby', 'json', 'verilog']
+" autocmd ColorScheme * highlight link githubFlavoredMarkdownCode CursorLine
 
 "augroup markdown
 "    " Markdown (no need for modula2 :)
-"    autocmd BufRead,BufNewFile *.md set filetype=markdown
 "
 "
 "    autocmd FileType markdown set wrap linebreak nolist
@@ -849,3 +952,43 @@ autocmd ColorScheme * highlight link githubFlavoredMarkdownCode CursorLine
 "    " http://stackoverflow.com/questions/5074191/vim-fold-top-level-folds-only
 "    autocmd FileType markdown normal %foldc
 "augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" j k as escape
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+imap jk <Esc>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ROOT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup root
+    autocmd!
+
+    autocmd BufNewFile,BufReadPost *.C set filetype=cpp
+
+    autocmd filetype cpp nnoremap <buffer> <leader>th1f oTH1F* h1 = new TH1F ("name", "title",  nbinsx, xlow, xhigh);<ESC>
+    autocmd filetype cpp nnoremap <buffer> <leader>th2f oTH2F* h2 = new TH2F ("name", "title",  nbinsx, xlow, xhigh, nbinsy, ylow, yhigh);
+    autocmd filetype cpp nnoremap <buffer> <leader>th1d oTH1D* h1 = new TH1D ("name", "title",  nbinsx, xlow, xhigh);<ESC>
+    autocmd filetype cpp nnoremap <buffer> <leader>th2d oTH2D* h2 = new TH2D ("name", "title",  nbinsx, xlow, xhigh, nbinsy, ylow, yhigh);
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Show Commands In Progress
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set showcmd
+set list
+"set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set listchars=tab:→\ ,extends:›,precedes:‹,nbsp:·,trail:·
+"set showbreak=↪\
+"set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
+
+if isdirectory($ROOTSYS.'/include')
+    set path+=$ROOTSYS/include
+endif
+
+let g:ale_cpp_clang_options='-std=c++14 -Wall -I/Users/andrew/root/include'
+let g:ale_cpp_clangtidy_options='-std=c++14 -Wall -I$ROOTSYS/include'
+
+let g:ale_linters = { 'cpp': ['clang']}
