@@ -1087,6 +1087,10 @@ let g:netrw_localrmdir='rm -r'
 " center screen on search result
 nnoremap n nzz
 
+
+" backspace in normal mode to jump to last used buffer
+nnoremap <BS> <C-^>
+
 function! s:update_fzf_colors()
   let rules =
   \ { 'fg':      [['Normal',       'fg']],
