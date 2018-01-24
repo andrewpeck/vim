@@ -37,7 +37,7 @@ Plug 'scrooloose/nerdcommenter'
 " TagList
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'vim-scripts/taglist.vim'
-nmap <silent> <Leader>t :TlistToggle<CR>
+nmap <silent> <Leader>tl :TlistToggle<CR>
 let g:Tlist_WinWidth = 60
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
