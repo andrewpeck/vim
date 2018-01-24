@@ -1079,6 +1079,10 @@ let g:ale_cpp_clangtidy_options='-std=c++14 -Wall -I$ROOTSYS/include'
 
 let g:ale_linters = { 'cpp': ['clang']}
 
+
+
+let g:netrw_localrmdir='rm -r'
+
 function! s:update_fzf_colors()
   let rules =
   \ { 'fg':      [['Normal',       'fg']],
