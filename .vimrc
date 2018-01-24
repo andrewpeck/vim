@@ -165,6 +165,8 @@ Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 
 Plug 'gabrielelana/vim-markdown'
 
+Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'nathanaelkane/vim-indent-guides'
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
 "Plug 'ervandew/supertab'
@@ -189,7 +191,7 @@ Plug 'morhetz/gruvbox'
 Plug 'dmcgrady/vim-lucario'
 Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'junegunn/seoul256.vim'
+Plug 'chriskempson/base16-vim'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
@@ -460,14 +462,16 @@ set backspace=eol,start,indent
     silent! colorscheme desert256
     silent! colorscheme solarized
     silent! colorscheme github
-    "silent! colorscheme PaperColor
 
     "set background=dark
     "silent! colorscheme gruvbox
     "let g:gruvbox_contrast_dark="soft"
 
-    set background=light
     silent! colorscheme summerfruit256
+    set background=dark
+    silent! colorscheme PaperColor
+    silent! colorscheme base16-atelier-dune
+
 
     "set background=dark
     "set background=light
@@ -492,21 +496,31 @@ set backspace=eol,start,indent
     set cursorcolumn
     set cursorline
 
-    "gruvbox
-    if (g:colors_name=="gruvbox")
-        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
-        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
-    elseif (g:colors_name=="summerfruit256")
-        "summerfruit
-        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=#F4F4F4
-        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=#F4F4F4
-    endif
+"    "gruvbox
+"    if (g:colors_name=="gruvbox")
+"        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+"        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=black guibg=black
+"    elseif (g:colors_name=="summerfruit256")
+"        "summerfruit
+"        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=#F4F4F4
+"        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=#F4F4F4
+"    elseif (g:colors_name=="PaperColor")
+"        "summerfruit
+"        hi CursorLine   term=bold ctermfg=NONE guifg=NONE ctermbg=white  guibg=black
+"        hi CursorColumn term=bold ctermfg=NONE guifg=NONE ctermbg=NONE  guibg=black
+"        ""if (set background ?) = "background=dark")
+"        "    highlight Cursor  guifg=white guibg=black
+"        "    highlight iCursor guifg=white guibg=black
+"        "else
+"        highlight Cursor  guifg=white guibg=darkgreen
+"        highlight iCursor guifg=white guibg=white
+"        "endif
+"    endif
 
     syntax sync minlines=256
-    "set t_Co=256
+    set t_Co=256
 
-    highlight Cursor  guifg=white guibg=black
-    highlight iCursor guifg=white guibg=black
+
     "highlight iCursor guifg=white guibg=steelblue " steelblue was nice on gruvbox
     set guicursor=n-v-c:block-Cursor
     set guicursor+=n-v-c:blinkon0
