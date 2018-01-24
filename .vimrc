@@ -112,12 +112,13 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
-"Plug 'Valloric/YouCompleteMe'
-"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
+Plug 'Valloric/YouCompleteMe'
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "map <silent> <Leader>f :YcmCompleter FixIt<CR>
-"endif
-"
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
