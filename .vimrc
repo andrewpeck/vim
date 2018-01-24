@@ -1083,6 +1083,10 @@ let g:ale_linters = { 'cpp': ['clang']}
 
 let g:netrw_localrmdir='rm -r'
 
+
+" center screen on search result
+nnoremap n nzz
+
 function! s:update_fzf_colors()
   let rules =
   \ { 'fg':      [['Normal',       'fg']],
