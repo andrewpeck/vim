@@ -176,6 +176,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'vhda/verilog_systemverilog.vim'
+Plug 'suoto/vim-hdl'
 
 let g:lessspace_enabled = 1
 
