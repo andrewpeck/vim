@@ -238,6 +238,9 @@ filetype plugin on
 " airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+
     " " Enable the list of buffers
     " let g:airline#extensions#tabline#enabled = 1
 
