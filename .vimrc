@@ -25,13 +25,13 @@ filetype off " needed for vundle
     call plug#begin()
 "endif
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDtree
+" NERD
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plug 'scrooloose/nerdtree'
 " nmap <silent> <Leader>n :NERDTreeToggle<CR>
 " let g:NERDTreeWinSize = 40
+Plug 'scrooloose/nerdcommenter'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TagList
@@ -44,7 +44,39 @@ let g:Tlist_WinWidth = 60
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'pbogut/fzf-mru.vim'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard | grep -v \.svn']
+map <silent> <C-p> :GFiles
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" FZF
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+map <silent> <Leader>tt :Tags<CR>
+map <silent> <Leader>f :Files ~/Dropbox<CR>
+map <silent> <Leader>g :GGrep<CR>
+map <silent> <Leader>rr :FZFMru<CR>
+map <silent> <Leader>rg :Rg<CR>
+map <silent> <Leader>b :Buffers<CR>
+
+" 'rg -g "" --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg -g "" --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'},'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'},'right:50%'),
+  \   <bang>0)
+
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 3..'},'up:60%')
+  \           : fzf#vim#with_preview({'options': '--delimiter : --nth 3..'},'right:50%'),
+  \   <bang>0)
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize
@@ -992,3 +1024,37 @@ let g:ale_cpp_clang_options='-std=c++14 -Wall -I/Users/andrew/root/include'
 let g:ale_cpp_clangtidy_options='-std=c++14 -Wall -I$ROOTSYS/include'
 
 let g:ale_linters = { 'cpp': ['clang']}
+
+function! s:update_fzf_colors()
+  let rules =
+  \ { 'fg':      [['Normal',       'fg']],
+    \ 'bg':      [['Normal',       'bg']],
+    \ 'hl':      [['Comment',      'fg']],
+    \ 'fg+':     [['CursorColumn', 'fg'], ['Normal', 'fg']],
+    \ 'bg+':     [['CursorColumn', 'bg']],
+    \ 'hl+':     [['Statement',    'fg']],
+    \ 'info':    [['PreProc',      'fg']],
+    \ 'prompt':  [['Conditional',  'fg']],
+    \ 'pointer': [['Exception',    'fg']],
+    \ 'marker':  [['Keyword',      'fg']],
+    \ 'spinner': [['Label',        'fg']],
+    \ 'header':  [['Comment',      'fg']] }
+  let cols = []
+  for [name, pairs] in items(rules)
+    for pair in pairs
+      let code = synIDattr(synIDtrans(hlID(pair[0])), pair[1])
+      if !empty(name) && code > 0
+        call add(cols, name.':'.code)
+        break
+      endif
+    endfor
+  endfor
+  let s:orig_fzf_default_opts = get(s:, 'orig_fzf_default_opts', $FZF_DEFAULT_OPTS)
+  let $FZF_DEFAULT_OPTS = s:orig_fzf_default_opts .
+        \ empty(cols) ? '' : (' --color='.join(cols, ','))
+endfunction
+
+augroup _fzf
+  autocmd!
+  autocmd ColorScheme * call <sid>update_fzf_colors()
+augroup END
