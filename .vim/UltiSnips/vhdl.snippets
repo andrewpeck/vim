@@ -1,0 +1,68 @@
+snippet process "VHDL Process"
+process (${1:clock}) begin
+	if (rising_edge($1)) then
+
+	end if;
+end process;
+endsnippet
+
+snippet entity
+${1:module}_inst : entity work.$1
+generic map (
+
+);
+port map (
+
+);
+endsnippet
+
+snippet module
+library ieee;
+use ieee.std_logic_1164.all;
+library unisim;
+use unisim.vcomponents.all;
+
+entity ${1:module} is
+port(
+);
+
+architecture Behavioral of $1 is
+
+
+end Behavioral;
+endsnippet
+
+snippet description
+----------------------------------------------------------------------------------
+-- ${1:CMS Muon Endcap}
+-- ${2:GEM Collaboration}
+-- ${3:Project} -- ${4:Description}
+-- ${4:A. Peck}
+----------------------------------------------------------------------------------
+-- Description:
+--   $5
+----------------------------------------------------------------------------------
+-- `date +%Y/%m/%d` --
+----------------------------------------------------------------------------------
+endsnippet
+
+snippet today
+`date +%Y/%m/%d`
+endsnippet
+
+snippet KEEP
+attribute KEEP : string;
+attribute KEEP of $1 : signal is "TRUE";
+endsnippet
+snippet IOB
+attribute IOB : string;
+attribute IOB of $1 : signal is "TRUE";
+endsnippet
+snippet DEBUG
+attribute DEBUG : string;
+attribute DEBUG of $1 : signal is "TRUE";
+endsnippet
+snippet SAVE
+attribute SAVE : string;
+attribute SAVE of $1 : signal is "TRUE";
+endsnippet

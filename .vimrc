@@ -96,6 +96,26 @@ let g:gitgutter_sign_modified_removed = '∙'
 
 Plug 'tpope/vim-fugitive'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ultisnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Plug 'SirVer/ultisnips'
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+set runtimepath+=~/.vim/UltiSnips/
+let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+let g:UltiSnipsExpandTrigger = "<c-c>"
+let g:UltiSnipsJumpForwardTrigger       =  "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger      =  "<c-k>"
+
+
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize
@@ -147,7 +167,7 @@ Plug 'gabrielelana/vim-markdown'
 
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/a.vim'
