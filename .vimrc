@@ -786,11 +786,11 @@ augroup END
     noremap <silent> <Leader>w :call ToggleWrap()<CR>
 
     let g:softwrap = 0
+    set nowrap
 
-    function ToggleWrap()
-        if g:softwrap
+    function! SetNoWrap()
             let g:softwrap=0
-            echo "Disabling Softwrapping"
+        " echo "Disabling Softwrapping"
             "Wrap OFF"
             setlocal nowrap
             set virtualedit=all
@@ -805,13 +805,15 @@ augroup END
 
             silent! nunmap <buffer>  k
             silent! nunmap <buffer>  j
-        else
+    endfunction
+
+    function! SetWrap()
             let g:softwrap=1
             "Wrap ON"
-            echo "Enabling Softwrapping"
+        " echo "Enabling Softwrapping"
             setlocal wrap linebreak nolist
 
-            if (!hostname()=='ucla-cms-pc' && !has("win32"))
+        if (!has("win32"))
                 setlocal breakindent
             endif
 
@@ -829,8 +831,17 @@ augroup END
 
             noremap  <buffer> <silent> k  gk
             noremap  <buffer> <silent> j  gj
+    endfunction
+
+    function! ToggleWrap()
+        if g:softwrap
+            call SetNoWrap()
+        else
+            call SetWrap()
         endif
     endfunction
+
+    call SetWrap()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "parenthesis match options
