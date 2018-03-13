@@ -469,19 +469,20 @@ set backspace=eol,start,indent
 " Theme
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    silent! colorscheme peachpuff
-    silent! colorscheme desert256
-    silent! colorscheme solarized
-    silent! colorscheme github
+    "silent! colorscheme peachpuff
+    "silent! colorscheme desert256
+    "silent! colorscheme solarized
+    "silent! colorscheme github
+
+    ""set background=dark
+    ""silent! colorscheme gruvbox
+    ""let g:gruvbox_contrast_dark="soft"
 
     "set background=dark
-    "silent! colorscheme gruvbox
-    "let g:gruvbox_contrast_dark="soft"
-
-    silent! colorscheme summerfruit256
-    set background=dark
-    silent! colorscheme PaperColor
-    silent! colorscheme base16-atelier-dune
+    set background=light
+    silent! colorscheme base16-github
+    "silent! colorscheme summerfruit256
+    "silent! colorscheme base16-atelier-dune
 
 
     "set background=dark
