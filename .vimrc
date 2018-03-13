@@ -201,6 +201,42 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'chriskempson/base16-vim'
 Plug 'guns/jellyx.vim'
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" airline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    set ttimeoutlen=50
+
+    "always show status line
+    set laststatus=2
+
+    " " Enable the list of buffers
+    " let g:airline#extensions#tabline#enabled = 1
+
+    " " Show just the filename
+    " let g:airline#extensions#tabline#fnamemod = ':t'
+    " let g:airline_theme             = 'powerlineish'
+    " let g:airline_powerline_fonts = 1
+    " if !exists('g:airline_symbols')
+    "     let g:airline_symbols = {}
+    " endif
+
+    " set encoding=utf-8
+    " " unicode symbols
+    " let g:airline_left_sep           = '»'
+    " let g:airline_left_sep           = '▶'
+    " let g:airline_right_sep          = '«'
+    " let g:airline_right_sep          = '◀'
+    " let g:airline_symbols.linenr     = '␊'
+    " let g:airline_symbols.linenr     = '␤'
+    " let g:airline_symbols.linenr     = '¶'
+    " let g:airline_symbols.branch     = '⎇'
+    " let g:airline_symbols.paste      = 'ρ'
+    " let g:airline_symbols.paste      = 'Þ'
+    " let g:airline_symbols.paste      = '∥'
+    " let g:airline_symbols.whitespace = 'Ξ'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
@@ -236,45 +272,6 @@ filetype plugin on
     " let g:netrw_list_hide=netrw_gitignore#Hide()
     " endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" always show status line
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    set laststatus=2
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
-
-    " " Enable the list of buffers
-    " let g:airline#extensions#tabline#enabled = 1
-
-    " " Show just the filename
-    " let g:airline#extensions#tabline#fnamemod = ':t'
-    " let g:airline_theme             = 'powerlineish'
-    " let g:airline_powerline_fonts = 1
-    " if !exists('g:airline_symbols')
-    "     let g:airline_symbols = {}
-    " endif
-
-    " set encoding=utf-8
-    " " unicode symbols
-    " let g:airline_left_sep = '»'
-    " let g:airline_left_sep = '▶'
-    " let g:airline_right_sep = '«'
-    " let g:airline_right_sep = '◀'
-    " let g:airline_symbols.linenr = '␊'
-    " let g:airline_symbols.linenr = '␤'
-    " let g:airline_symbols.linenr = '¶'
-    " let g:airline_symbols.branch = '⎇'
-    " let g:airline_symbols.paste = 'ρ'
-    " let g:airline_symbols.paste = 'Þ'
-    " let g:airline_symbols.paste = '∥'
-    " let g:airline_symbols.whitespace = 'Ξ'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " C++ Syntax Highlighting for Arduino .ino files
