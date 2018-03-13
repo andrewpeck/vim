@@ -44,7 +44,6 @@ let g:Tlist_WinWidth = 60
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'pbogut/fzf-mru.vim'
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard | grep -v \.svn']
 map <silent> <C-p> :GFiles
 
@@ -54,6 +53,7 @@ map <silent> <C-p> :GFiles
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'pbogut/fzf-mru.vim'
 
 map <silent> <Leader>tt :Tags<CR>
 map <silent> <Leader>f :Files ~/Dropbox<CR>
@@ -70,9 +70,13 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'},'right:50%'),
   \   <bang>0)
 
+
+" - fzf#vim#grep(command, with_column, [options], [fullscreen])
+"command! -bang -nargs=* GGrep
+"  \ call fzf#vim#grep('cd `git rev-parse --show-toplevel` && git grep --line-number . && cd -', 0, <bang>0)
 command! -bang -nargs=* GGrep
   \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   'git grep --line-number . -- :/ '.shellescape(<q-args>), 0,
   \   <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 3..'},'up:60%')
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 3..'},'right:50%'),
   \   <bang>0)
@@ -1128,3 +1132,19 @@ augroup _fzf
   autocmd!
   autocmd ColorScheme * call <sid>update_fzf_colors()
 augroup END
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
