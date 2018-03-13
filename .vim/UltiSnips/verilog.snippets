@@ -47,3 +47,15 @@ endmodule
 //----------------------------------------------------------------------------------------------------------------------
 
 endsnippet
+
+
+snippet case "Verilog case"
+case (${1:statement})
+    $2 : $3
+    default :
+endcase
+endsnippet
+
+snippet keep "Verilog Keep"
+(* keep = "true" *)
+endsnippet
