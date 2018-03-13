@@ -447,7 +447,8 @@ set backspace=eol,start,indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Font
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+    " nvim doesn't support guifont...
+    if (!has("nvim"))
     if hostname()=='zenbook'
         " make the font a little bit bigger for the laptop
         set guifont=Ubuntu\ Mono\ 13
@@ -461,6 +462,7 @@ set backspace=eol,start,indent
         set guifont=Monaco:h14
     else
         set guifont=Monospace\ 9
+    endif
     endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
