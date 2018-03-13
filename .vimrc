@@ -1165,3 +1165,13 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+
+if (has("nvim"))
+  let g:python_host_prog  = '/usr/bin/python2.7'
+  let g:python3_host_prog = '/usr/local/bin/python3.6'
+
+
+  " make neovim check for updated files
+  set autoread
+  au FocusGained * :checktime
+endif
