@@ -168,19 +168,20 @@ Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Plug 'gabrielelana/vim-markdown'
-
+Plug 'junegunn/limelight.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
 "Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-eunuch'
 Plug 'tmhedberg/matchit'
 Plug 'vim-scripts/a.vim'
 Plug 'thirtythreeforty/lessspace.vim'
 Plug 'metakirby5/codi.vim'
 Plug 'vhda/verilog_systemverilog.vim'
-Plug 'suoto/vim-hdl'
 
 let g:lessspace_enabled = 1
 
@@ -192,11 +193,14 @@ Plug 'itspriddle/vim-marked'
 endif
 
 " Color schemes
+Plug 'zeis/vim-kolor'
 Plug 'morhetz/gruvbox'
 Plug 'dmcgrady/vim-lucario'
 Plug 'dracula/vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'chriskempson/base16-vim'
+Plug 'guns/jellyx.vim'
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE
