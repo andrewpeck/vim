@@ -25,6 +25,8 @@ filetype off " needed for vundle
     call plug#begin()
 "endif
 
+Plug 'jceb/vim-orgmode'
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERD
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -56,11 +58,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'pbogut/fzf-mru.vim'
 
 map <silent> <Leader>tt :Tags<CR>
-map <silent> <Leader>f :Files ~/Dropbox<CR>
-map <silent> <Leader>g :GGrep<CR>
+map <silent> <Leader>f  :Files ~/Dropbox<CR>
+map <silent> <Leader>g  :GGrep<CR>
 map <silent> <Leader>rr :FZFMru<CR>
 map <silent> <Leader>rg :Rg<CR>
-map <silent> <Leader>b :Buffers<CR>
+map <silent> <Leader>b  :Buffers<CR>
 
 " 'rg -g "" --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
 command! -bang -nargs=* Rg
@@ -99,6 +101,7 @@ let g:gitgutter_sign_modified_removed = '∙'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ultisnips
@@ -167,11 +170,14 @@ Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+Plug 'vitalk/vim-simple-todo'
+Plug 'tpope/vim-repeat'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'gabrielelana/vim-markdown'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'lervag/vimtex'
+"Plug 'lervag/vimtex'
 Plug 'mbbill/undotree'
 "Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
@@ -212,8 +218,13 @@ Plug 'guns/jellyx.vim'
     "always show status line
     set laststatus=2
 
-    " " Enable the list of buffers
-    " let g:airline#extensions#tabline#enabled = 1
+    " Enable the list of buffers
+    let g:airline#extensions#tabline#enabled = 1
+
+    " Show just the filename
+    let g:airline#extensions#tabline#fnamemod = ':t'
+
+
 
     " " Show just the filename
     " let g:airline#extensions#tabline#fnamemod = ':t'
@@ -442,20 +453,20 @@ set backspace=eol,start,indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " nvim doesn't support guifont...
     if (!has("nvim"))
-    if hostname()=='zenbook'
-        " make the font a little bit bigger for the laptop
-        set guifont=Ubuntu\ Mono\ 13
-        ",Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
-    elseif hostname()=='ucla-cms-pc'
-        set guifont=DejaVu\ Sans\ Mono\ 10
-    elseif hostname()=='arch'
-        set guifont=Inconsolata-g\ 9,DejaVu\ Sans\ Mono\ 10,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
-    elseif system('uname -s') == "Darwin\n"
-        "set noantialias
-        set guifont=Monaco:h14
-    else
-        set guifont=Monospace\ 9
-    endif
+        if hostname()=='zenbook'
+            " make the font a little bit bigger for the laptop
+            set guifont=Ubuntu\ Mono\ 13
+            ",Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
+        elseif hostname()=='ucla-cms-pc'
+            set guifont=DejaVu\ Sans\ Mono\ 10
+        elseif hostname()=='arch'
+            set guifont=Inconsolata-g\ 9,DejaVu\ Sans\ Mono\ 10,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
+        elseif system('uname -s') == "Darwin\n"
+            "set noantialias
+            set guifont=Monaco:h14
+        else
+            set guifont=Monospace\ 9
+        endif
     endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -602,7 +613,8 @@ augroup END
         let g:Tex_DefaultTargetFormat = 'pdf'
 
         " Setup the compile rule for pdf to use pdflatex with synctex enabled
-        let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+        "let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+        let g:Tex_CompileRule_pdf = "latexmk -pdflatex='pdflatex -file-line-error -synctex=1 -interaction=nonstopmode' -bibtex -pdf $*"
 
         " PDF display rule
         let g:Tex_ViewRule_pdf = 'open -a Skim'
@@ -782,48 +794,48 @@ augroup END
     set nowrap
 
     function! SetNoWrap()
-            let g:softwrap=0
+        let g:softwrap=0
         " echo "Disabling Softwrapping"
-            "Wrap OFF"
-            setlocal nowrap
-            set virtualedit=all
-            silent! nunmap <buffer> <Up>
-            silent! nunmap <buffer> <Down>
-            silent! nunmap <buffer> <Home>
-            silent! nunmap <buffer> <End>
-            silent! iunmap <buffer> <Up>
-            silent! iunmap <buffer> <Down>
-            silent! iunmap <buffer> <Home>
-            silent! iunmap <buffer> <End>
+        "Wrap OFF"
+        setlocal nowrap
+        set virtualedit=all
+        silent! nunmap <buffer> <Up>
+        silent! nunmap <buffer> <Down>
+        silent! nunmap <buffer> <Home>
+        silent! nunmap <buffer> <End>
+        silent! iunmap <buffer> <Up>
+        silent! iunmap <buffer> <Down>
+        silent! iunmap <buffer> <Home>
+        silent! iunmap <buffer> <End>
 
-            silent! nunmap <buffer>  k
-            silent! nunmap <buffer>  j
+        silent! nunmap <buffer>  k
+        silent! nunmap <buffer>  j
     endfunction
 
     function! SetWrap()
-            let g:softwrap=1
-            "Wrap ON"
+        let g:softwrap=1
+        "Wrap ON"
         " echo "Enabling Softwrapping"
-            setlocal wrap linebreak nolist
+        setlocal wrap linebreak nolist
 
         if (!has("win32"))
-                setlocal breakindent
-            endif
+            setlocal breakindent
+        endif
 
-            "set virtualedit=
-            "setlocal display+=lastline
-            noremap  <buffer> <silent> <Up>   gk
-            noremap  <buffer> <silent> <Down> gj
-            inoremap <buffer> <silent> <Up>   <C-o>gk
-            inoremap <buffer> <silent> <Down> <C-o>gj
+        "set virtualedit=
+        "setlocal display+=lastline
+        noremap  <buffer> <silent> <Up>   gk
+        noremap  <buffer> <silent> <Down> gj
+        inoremap <buffer> <silent> <Up>   <C-o>gk
+        inoremap <buffer> <silent> <Down> <C-o>gj
 
-            noremap  <buffer> <silent> <Home> g<Home>
-            noremap  <buffer> <silent> <End>  g<End>
-            inoremap <buffer> <silent> <Home> <C-o>g<Home>
-            inoremap <buffer> <silent> <End>  <C-o>g<End>
+        noremap  <buffer> <silent> <Home> g<Home>
+        noremap  <buffer> <silent> <End>  g<End>
+        inoremap <buffer> <silent> <Home> <C-o>g<Home>
+        inoremap <buffer> <silent> <End>  <C-o>g<End>
 
-            noremap  <buffer> <silent> k  gk
-            noremap  <buffer> <silent> j  gj
+        noremap  <buffer> <silent> k  gk
+        noremap  <buffer> <silent> j  gj
     endfunction
 
     function! ToggleWrap()
@@ -1033,21 +1045,25 @@ set autoread
 
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 
-if system('uname -s') == "Darwin\n"
-    autocmd BufNewFile,BufRead,FileReadPost *.md :MarkedOpen
-    "autocmd BufNewFile,BufRead,FileReadPost *.md :set background=light
-    "autocmd BufNewFile,BufRead,FileReadPost *.md :colorscheme PaperColor
-else
-
-endif
+"if system('uname -s') == "Darwin\n"
+""    autocmd BufNewFile,BufRead,FileReadPost *.md :MarkedOpen
+""    autocmd BufNewFile,BufRead,FileReadPost *.md :set background=light
+""    autocmd BufNewFile,BufRead,FileReadPost *.md :colorscheme PaperColor
+"else
+"
+"endif
 
 " let g:vim_markdown_fenced_languages = ['cpp', 'ruby', 'json', 'verilog']
 " autocmd ColorScheme * highlight link githubFlavoredMarkdownCode CursorLine
 
-"augroup markdown
+augroup markdown
+
+    autocmd FileType markdown set nocursorcolumn
+    autocmd FileType markdown set nocursorline
+    autocmd FileType markdown call SetWrap()
+    autocmd FileType markdown setlocal cc=
+
 "    " Markdown (no need for modula2 :)
-"
-"
 "    autocmd FileType markdown set wrap linebreak nolist
 "    autocmd FileType markdown set textwidth=0
 "    autocmd FileType markdown set wrapmargin=0
@@ -1055,7 +1071,7 @@ endif
 "    " http://vim.wikia.com/wiki/All_folds_open_when_opening_a_file
 "    " http://stackoverflow.com/questions/5074191/vim-fold-top-level-folds-only
 "    autocmd FileType markdown normal %foldc
-"augroup END
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " j k as escape
@@ -1143,20 +1159,20 @@ augroup _fzf
   autocmd ColorScheme * call <sid>update_fzf_colors()
 augroup END
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" let g:fzf_colors =
+" \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
 
 if (has("nvim"))

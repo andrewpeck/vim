@@ -2,6 +2,10 @@
 #
 #----------------------------------------------------------------------------------------------------------------------
 
+snippet today
+`date +%Y/%m/%d`
+endsnippet
+
 snippet gen "Generate for loop"
 genvar ${1:i};
 generate
@@ -58,4 +62,31 @@ endsnippet
 
 snippet keep "Verilog Keep"
 (* keep = "true" *)
+endsnippet
+
+snippet function "Verilog function"
+module simple_function();
+
+function  ${1:myfunction};
+input a, b, c, d;
+begin
+    $1 = ((a+b) + (c-d));
+end
+endfunction
+
+endmodule
+endsnippet
+
+snippet description
+//--------------------------------------------------------------------------------
+// ${1:CMS Muon Endcap}
+// ${2:GEM Collaboration}
+// ${3:Project} -- ${4:Description}
+// ${4:A. Peck}
+//--------------------------------------------------------------------------------
+// Description:
+//   $5
+//--------------------------------------------------------------------------------
+// `date +%Y/%m/%d` --
+//--------------------------------------------------------------------------------
 endsnippet
