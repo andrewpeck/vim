@@ -749,6 +749,9 @@ augroup END
 
     set showmatch
     set matchtime=3
+    if (has("nvim"))
+      set inccommand=nosplit
+    endif
     set incsearch
     set hlsearch
     set ignorecase
