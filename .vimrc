@@ -14,38 +14,42 @@ if has("gui_macvim")
     let macvim_skip_cmd_opt_movement = 1
 endif
 
-
 filetype off " needed for vundle
 
-"if (has("win32"))
+packadd minpac
 
+command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update()
+command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
 
-"    call plug#begin(~/vimfiles/plugged)
-"else
-    call plug#begin()
+if !exists('*minpac#init')
+  finish
+endif
+
+call minpac#init()
+
 "endif
 
-Plug 'jceb/vim-orgmode'
+call minpac#add( 'jceb/vim-orgmode')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERD
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'scrooloose/nerdtree'
+" call minpac#add('scrooloose/nerdtree')
 " nmap <silent> <Leader>n :NERDTreeToggle<CR>
 " let g:NERDTreeWinSize = 40
-Plug 'scrooloose/nerdcommenter'
+call minpac#add('scrooloose/nerdcommenter')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TagList
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/taglist.vim'
+call minpac#add( 'vim-scripts/taglist.vim')
 nmap <silent> <Leader>tl :TlistToggle<CR>
 let g:Tlist_WinWidth = 60
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ctrl-P
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'ctrlpvim/ctrlp.vim'
+call minpac#add( 'ctrlpvim/ctrlp.vim')
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard | grep -v \.svn']
 map <silent> <C-p> :GFiles
 
@@ -53,9 +57,9 @@ map <silent> <C-p> :GFiles
 " FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-Plug 'pbogut/fzf-mru.vim'
+call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': '!./install --all'})
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('pbogut/fzf-mru.vim')
 
 map <silent> <Leader>tt :Tags<CR>
 map <silent> <Leader>f  :Files ~/Dropbox<CR>
@@ -86,7 +90,7 @@ command! -bang -nargs=* GGrep
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Git Gutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'airblade/vim-gitgutter'
+call minpac#add( 'airblade/vim-gitgutter')
 let g:gitgutter_max_signs = 2000  " default value
 set updatetime=250
 nmap <Leader>gg :GitGutterToggle<CR>
@@ -100,14 +104,14 @@ let g:gitgutter_sign_modified_removed = '∙'
 " VIM Fugitive
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
+call minpac#add( 'tpope/vim-fugitive')
+call minpac#add( 'tpope/vim-vinegar')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ultisnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Plug 'SirVer/ultisnips'
+call minpac#add( 'SirVer/ultisnips')
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 set runtimepath+=~/.vim/UltiSnips/
 let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
@@ -127,7 +131,7 @@ let g:UltiSnipsEditSplit="vertical"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tabularize
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'godlygeek/tabular'
+call minpac#add('godlygeek/tabular')
 map <silent> <Leader>= :Tabularize/^[^=]*\zs=/l1<CR>
 map <silent> <Leader>( :Tabularize/^[^(]*\zs (/l0<CR>
 map <silent> <Leader>/ :Tabularize/\(^\s*\)\@<!\/\//l1<CR>
@@ -141,7 +145,7 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
-Plug 'Valloric/YouCompleteMe'
+call minpac#add( 'Valloric/YouCompleteMe')
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "map <silent> <Leader>f :YcmCompleter FixIt<CR>
 endif
@@ -149,7 +153,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Syntastic
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plug 'scrooloose/syntastic'
+" call minpac#add( 'scrooloose/syntastic')
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
@@ -162,57 +166,57 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Conflict Motions
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'vim-scripts/ConflictMotions'
-Plug 'vim-scripts/CountJump' " needed by ConflictMotions
-Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
+call minpac#add( 'vim-scripts/ConflictMotions')
+call minpac#add( 'vim-scripts/CountJump') " needed by ConflictMotions
+call minpac#add( 'vim-scripts/ingo-library') " needed by ConflictMotions
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Plug 'vitalk/vim-simple-todo'
-Plug 'tpope/vim-repeat'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'gabrielelana/vim-markdown'
-Plug 'junegunn/limelight.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'nathanaelkane/vim-indent-guides'
-"Plug 'lervag/vimtex'
-Plug 'mbbill/undotree'
-"Plug 'ervandew/supertab'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-eunuch'
-Plug 'tmhedberg/matchit'
-Plug 'vim-scripts/a.vim'
-Plug 'thirtythreeforty/lessspace.vim'
-Plug 'metakirby5/codi.vim'
-Plug 'vhda/verilog_systemverilog.vim'
+call minpac#add('vitalk/vim-simple-todo')
+call minpac#add('tpope/vim-repeat')
+call minpac#add('ludovicchabant/vim-gutentags')
+call minpac#add('gabrielelana/vim-markdown')
+call minpac#add('junegunn/limelight.vim')
+call minpac#add('junegunn/rainbow_parentheses.vim')
+call minpac#add('nathanaelkane/vim-indent-guides')
+"call minpac#add('lervag/vimtex')
+call minpac#add('mbbill/undotree')
+"call minpac#add('ervandew/supertab')
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-sleuth')
+call minpac#add('tpope/vim-eunuch')
+call minpac#add('tmhedberg/matchit')
+call minpac#add('vim-scripts/a.vim')
+call minpac#add('thirtythreeforty/lessspace.vim')
+call minpac#add('metakirby5/codi.vim')
+call minpac#add('vhda/verilog_systemverilog.vim')
 
 let g:lessspace_enabled = 1
 
-Plug 'w0rp/ale'
+call minpac#add( 'w0rp/ale')
 
 " Marked is OSX Only
 if system('uname -s') == "Darwin\n"
-Plug 'itspriddle/vim-marked'
+call minpac#add('itspriddle/vim-marked')
 endif
 
 " Color schemes
-Plug 'zeis/vim-kolor'
-Plug 'morhetz/gruvbox'
-Plug 'dmcgrady/vim-lucario'
-Plug 'dracula/vim'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'chriskempson/base16-vim'
-Plug 'guns/jellyx.vim'
+call minpac#add('zeis/vim-kolor')
+call minpac#add('morhetz/gruvbox')
+call minpac#add('dmcgrady/vim-lucario')
+call minpac#add('dracula/vim')
+call minpac#add('NLKNguyen/papercolor-theme')
+call minpac#add('chriskempson/base16-vim')
+call minpac#add('guns/jellyx.vim')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " airline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
+    call minpac#add('vim-airline/vim-airline')
+    call minpac#add('vim-airline/vim-airline-themes')
     set ttimeoutlen=50
 
     "always show status line
@@ -223,8 +227,6 @@ Plug 'guns/jellyx.vim'
 
     " Show just the filename
     let g:airline#extensions#tabline#fnamemod = ':t'
-
-
 
     " " Show just the filename
     " let g:airline#extensions#tabline#fnamemod = ':t'
@@ -249,10 +251,6 @@ Plug 'guns/jellyx.vim'
     " let g:airline_symbols.paste      = '∥'
     " let g:airline_symbols.whitespace = 'Ξ'
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" END VUNDLE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call plug#end()
 filetype plugin indent on    " required
 filetype plugin on
 

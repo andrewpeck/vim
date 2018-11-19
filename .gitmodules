@@ -1,3 +1,6 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim
+[submodule ".vim/pack/minpac/opt/minpac"]
+	path = .vim/pack/minpac/opt/minpac
+	url = https://github.com/k-takata/minpac.git
