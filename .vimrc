@@ -29,8 +29,6 @@ call minpac#init()
 
 "endif
 
-call minpac#add( 'jceb/vim-orgmode')
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERD
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -104,8 +102,8 @@ let g:gitgutter_sign_modified_removed = '∙'
 " VIM Fugitive
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call minpac#add( 'tpope/vim-fugitive')
-call minpac#add( 'tpope/vim-vinegar')
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('tpope/vim-vinegar')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ultisnips
@@ -174,28 +172,30 @@ call minpac#add( 'vim-scripts/ingo-library') " needed by ConflictMotions
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+call minpac#add('JuliaEditorSupport/julia-vim')
+call minpac#add('jceb/vim-orgmode')
 call minpac#add('vitalk/vim-simple-todo')
 call minpac#add('tpope/vim-repeat')
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('gabrielelana/vim-markdown')
 call minpac#add('junegunn/limelight.vim')
 call minpac#add('junegunn/rainbow_parentheses.vim')
-call minpac#add('nathanaelkane/vim-indent-guides')
+"call minpac#add('Yggdroot/indentLine')
+
 "call minpac#add('lervag/vimtex')
 call minpac#add('mbbill/undotree')
 "call minpac#add('ervandew/supertab')
 call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-sleuth')
+"call minpac#add('tpope/vim-sleuth')
 call minpac#add('tpope/vim-eunuch')
 call minpac#add('tmhedberg/matchit')
 call minpac#add('vim-scripts/a.vim')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('metakirby5/codi.vim')
 call minpac#add('vhda/verilog_systemverilog.vim')
+call minpac#add( 'w0rp/ale')
 
 let g:lessspace_enabled = 1
-
-call minpac#add( 'w0rp/ale')
 
 " Marked is OSX Only
 if system('uname -s') == "Darwin\n"
@@ -203,11 +203,15 @@ call minpac#add('itspriddle/vim-marked')
 endif
 
 " Color schemes
+set termguicolors
+call minpac#add('patstockwell/vim-monokai-tasty')
 call minpac#add('zeis/vim-kolor')
 call minpac#add('morhetz/gruvbox')
 call minpac#add('dmcgrady/vim-lucario')
 call minpac#add('dracula/vim')
 call minpac#add('NLKNguyen/papercolor-theme')
+call minpac#add('iCyMind/NeoSolarized')
+call minpac#add('lifepillar/vim-solarized8')
 call minpac#add('chriskempson/base16-vim')
 call minpac#add('guns/jellyx.vim')
 
@@ -293,11 +297,25 @@ filetype plugin on
     autocmd BufNewFile,BufReadPost *.inc       set filetype=cpp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" XCI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    augroup xci
+        autocmd!
+        autocmd BufNewFile,BufReadPost *.xci set filetype=tcl
+    augroup END
+
+    autocmd BufNewFile,BufReadPost *.xci       set filetype=tcl
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " trailing whitespace
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "Delete trailing whitespace with <Leader>rtw
     nnoremap <Leader>rtw mz:%s/\s\+$//e<CR>`z
+
+    "Delete trailing whitespace with <Leader>rtw
+    nnoremap <Leader>rm mz:%s///g<CR>`z
 
     "Remove trailing whitespace automatically on Save
     "augroup RemoveTrailingWhitespace
@@ -336,7 +354,10 @@ filetype plugin on
     " " bang (!) is required since we are overwriting the DiffText setting. The
     " highlighting
     " for "Todo" also looks nice (yellow) if you don't like the "MatchParen" colors.
-    " highlight! link DiffText MatchParen
+    "highlight! link DiffText Todo
+    " Set high visibility for diff mode
+    let g:solarized_diffmode="high"
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Better Match Paren
@@ -461,7 +482,8 @@ set backspace=eol,start,indent
             set guifont=Inconsolata-g\ 9,DejaVu\ Sans\ Mono\ 10,Monofur\ Bold\ 10,Monospace\ 9,Source\ Code\ Pro\ 9,Inconsolata\ 9,Consolas\ 9
         elseif system('uname -s') == "Darwin\n"
             "set noantialias
-            set guifont=Monaco:h14
+            "set guifont=Monaco:h14
+            set guifont=Menlo:h14
         else
             set guifont=Monospace\ 9
         endif
@@ -476,18 +498,19 @@ set backspace=eol,start,indent
     "silent! colorscheme solarized
     "silent! colorscheme github
 
-    ""set background=dark
     ""silent! colorscheme gruvbox
     ""let g:gruvbox_contrast_dark="soft"
 
-    "set background=dark
+    "silent! colorscheme base16-github
+    let g:solarized_termcolors=16
+    "set t_Co=256
     set background=light
-    silent! colorscheme base16-github
-    "silent! colorscheme summerfruit256
+    "colorscheme NeoSolarized
+    "colorscheme vim-monokai-tasty
+    "silent! colorscheme solarized
+    silent! colorscheme summerfruit256
     "silent! colorscheme base16-atelier-dune
 
-
-    "set background=dark
     "set background=light
 
     " if has("gui_running")
@@ -507,8 +530,10 @@ set backspace=eol,start,indent
 
     syntax on
    "set nocursorcolumn
-    set cursorcolumn
-    set cursorline
+   "set cursorcolumn
+   "set cursorline
+    set foldcolumn=1
+    hi FoldColumn guifg=grey guibg=ctermbg
 
 "    "gruvbox
 "    if (g:colors_name=="gruvbox")
@@ -586,6 +611,9 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LaTeX
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+    au FileType tex setlocal nocursorline
+
 
     "vim latex variables
     " LaTeX (rubber) macro for compiling
@@ -684,21 +712,22 @@ augroup END
 " Spelling Settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    if has("spell")
-        "Turn on Spell check (us english)
-        setlocal spell spelllang=en_us
-        "highlight clear SpellBad
-        "highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline,bold
-        "highlight clear SpellCap
-        "highlight SpellCap term=underline cterm=underline
-        "highlight clear SpellRare
-        "highlight SpellRare term=underline cterm=underline
-        "highlight clear SpellLocal
-        "highlight SpellLocal term=underline cterm=underline
-        "nn :setlocal spell! spelllang=en_us
-        "imap :setlocal spell! spelllang=en_us
-    endif
+    set nospell
 
+    "if has("spell")
+    "    "Turn on Spell check (us english)
+    "    setlocal spell spelllang=en_us
+    "    "highlight clear SpellBad
+    "    "highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline,bold
+    "    "highlight clear SpellCap
+    "    "highlight SpellCap term=underline cterm=underline
+    "    "highlight clear SpellRare
+    "    "highlight SpellRare term=underline cterm=underline
+    "    "highlight clear SpellLocal
+    "    "highlight SpellLocal term=underline cterm=underline
+    "    "nn :setlocal spell! spelllang=en_us
+    "    "imap :setlocal spell! spelllang=en_us
+    "endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " window title
@@ -716,6 +745,8 @@ augroup END
         autocmd!
         autocmd BufEnter * silent! lcd %:p:h
     augroup END
+
+    set title
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "tab settings
@@ -738,20 +769,11 @@ augroup END
     augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Set title of window to file name
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-    set title
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " search options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     set showmatch
     set matchtime=3
-    if (has("nvim"))
-      set inccommand=nosplit
-    endif
     set incsearch
     set hlsearch
     set ignorecase
@@ -763,7 +785,7 @@ augroup END
 " Remember previous buffer session
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    exec 'set viminfo=%,' . &viminfo
+    "exec 'set viminfo=%,' . &viminfo
 
     "let python_highlight_all = 1
 
@@ -774,13 +796,12 @@ augroup END
     imap <C-BS> <C-W>
     imap <C-DEL> <ESC>ldei
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets F2 to enable and disable line numeration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     set nu!
-    nnoremap <F2> :set nonumber!<CR>:set foldcolumn=0<CR>
+    nnoremap <F2> :set nonumber!<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " better soft wrapping
@@ -867,7 +888,7 @@ endif
 "ignore whitespace in vimdiff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    set diffopt+=iwhite
+"   set diffopt+=iwhite
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "better tab completion
@@ -1177,11 +1198,11 @@ augroup END
 
 
 if (has("nvim"))
-  let g:python_host_prog  = '/usr/bin/python2.7'
-  let g:python3_host_prog = '/usr/local/bin/python3.6'
-
+  let g:python_host_prog  = '/usr/local/bin/python2'
+  let g:python3_host_prog = '/usr/local/bin/python3'
 
   " make neovim check for updated files
+  set inccommand=nosplit
   set autoread
   au FocusGained * :checktime
 endif
