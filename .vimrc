@@ -9,6 +9,7 @@
 
 
 set nocompatible
+set encoding=utf-8
 
 if has("gui_macvim")
     let macvim_skip_cmd_opt_movement = 1
@@ -92,11 +93,11 @@ call minpac#add( 'airblade/vim-gitgutter')
 let g:gitgutter_max_signs = 2000  " default value
 set updatetime=250
 nmap <Leader>gg :GitGutterToggle<CR>
-" GitGutter styling to use · instead of +/-
-let g:gitgutter_sign_added = '∙'
-let g:gitgutter_sign_modified = '∙'
-let g:gitgutter_sign_removed = '∙'
-let g:gitgutter_sign_modified_removed = '∙'
+" GitGutter styling to use � instead of +/-
+"let g:gitgutter_sign_added = '�'
+"let g:gitgutter_sign_modified = '�'
+"let g:gitgutter_sign_removed = '�'
+"let g:gitgutter_sign_modified_removed = '�'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VIM Fugitive
@@ -143,8 +144,8 @@ map <silent> <Leader>[ :Tabularize/ [/l0<CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if (!(hostname()=='ucla-cms-pc') && !(has("win32")))
-call minpac#add( 'Valloric/YouCompleteMe')
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+call minpac#add('Valloric/YouCompleteMe')
+"let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 "map <silent> <Leader>f :YcmCompleter FixIt<CR>
 endif
 
@@ -435,7 +436,11 @@ filetype plugin on
     "nmap <silent> <Leader>u :UndotreeToggle<CR>
 
     set undofile
-    set undodir=~/Dropbox/.vim/undodir
+    if has("win32")
+      set undodir=D:/Dropbox/.vim/undodir
+    else
+      set undodir=~/Dropbox/.vim/undodir
+    endif
 
     set history=2000
     set undolevels=2000
@@ -472,7 +477,10 @@ set backspace=eol,start,indent
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " nvim doesn't support guifont...
     if (!has("nvim"))
-        if hostname()=='zenbook'
+        if has("win32")
+            "let Tlist_Ctags_Cmd = 'C:\ctags.exe'
+            set guifont=Consolas:h10
+        elseif hostname()=='zenbook'
             " make the font a little bit bigger for the laptop
             set guifont=Ubuntu\ Mono\ 13
             ",Ricty\ Diminished\ Regular\ 13,Inconsolata-g\ 11,Source\ Code\ Pro\ 11,Inconsolata\ 11
@@ -755,7 +763,7 @@ augroup END
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
-    set smarttab
+    "set smarttab
     set expandtab
     set shiftround " >> << keys move to multiple values of shiftwidth
 
@@ -920,8 +928,7 @@ endif
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     if has("win32")
-        //let Tlist_Ctags_Cmd = 'C:\ctags.exe'
-        set gfn=Consolas
+        "let Tlist_Ctags_Cmd = 'C:\ctags.exe'
     endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -1119,11 +1126,8 @@ augroup END
 " Show Commands In Progress
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showcmd
-set list
-"set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
-set listchars=tab:→\ ,extends:›,precedes:‹,nbsp:·,trail:·
-"set showbreak=↪\
-"set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+set nolist
+set listchars=tab:?\ ,extends:�,precedes:�,nbsp:�,trail:�
 
 
 if isdirectory($ROOTSYS.'/include')
@@ -1181,21 +1185,22 @@ augroup _fzf
   autocmd ColorScheme * call <sid>update_fzf_colors()
 augroup END
 
-" let g:fzf_colors =
-" \ { 'fg':      ['fg', 'Normal'],
-"   \ 'bg':      ['bg', 'Normal'],
-"   \ 'hl':      ['fg', 'Comment'],
-"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-"   \ 'hl+':     ['fg', 'Statement'],
-"   \ 'info':    ['fg', 'PreProc'],
-"   \ 'border':  ['fg', 'Ignore'],
-"   \ 'prompt':  ['fg', 'Conditional'],
-"   \ 'pointer': ['fg', 'Exception'],
-"   \ 'marker':  ['fg', 'Keyword'],
-"   \ 'spinner': ['fg', 'Label'],
-"   \ 'header':  ['fg', 'Comment'] }
-
+if (has("win32"))
+    let g:fzf_colors =
+    \ { 'fg':      ['fg', 'Normal'],
+    \   'bg':      ['bg', 'Normal'],
+    \   'hl':      ['fg', 'Comment'],
+    \   'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+    \   'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+    \   'hl+':     ['fg', 'Statement'],
+    \   'info':    ['fg', 'PreProc'],
+    \   'border':  ['fg', 'Ignore'],
+    \   'prompt':  ['fg', 'Conditional'],
+    \   'pointer': ['fg', 'Exception'],
+    \   'marker':  ['fg', 'Keyword'],
+    \   'spinner': ['fg', 'Label'],
+    \   'header':  ['fg', 'Comment'] }
+endif
 
 if (has("nvim"))
   let g:python_host_prog  = '/usr/local/bin/python2'
