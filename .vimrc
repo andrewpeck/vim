@@ -37,6 +37,7 @@ call minpac#init()
 " nmap <silent> <Leader>n :NERDTreeToggle<CR>
 " let g:NERDTreeWinSize = 40
 call minpac#add('scrooloose/nerdcommenter')
+call minpac#add('justinmk/vim-gtfo')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TagList
@@ -50,7 +51,7 @@ let g:Tlist_WinWidth = 60
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 call minpac#add( 'ctrlpvim/ctrlp.vim')
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard | grep -v \.svn']
-map <silent> <C-p> :GFiles
+map <silent> <C-p> :GFiles<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
@@ -194,7 +195,8 @@ call minpac#add('vim-scripts/a.vim')
 call minpac#add('thirtythreeforty/lessspace.vim')
 call minpac#add('metakirby5/codi.vim')
 call minpac#add('vhda/verilog_systemverilog.vim')
-call minpac#add( 'w0rp/ale')
+call minpac#add('vim-scripts/VIP')
+call minpac#add('w0rp/ale')
 
 let g:lessspace_enabled = 1
 
@@ -276,7 +278,7 @@ filetype plugin on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     "leader e to open netrw
-    nmap <silent> <Leader>e :Explore<CR>
+    "nmap <silent> <Leader>e :Explore<CR>
 
     "hide the giant banner at the top of netrw
     let g:netrw_banner=0
@@ -448,7 +450,7 @@ filetype plugin on
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Text Width
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    set colorcolumn=120
+    "set colorcolumn=120
     "set tw=120
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -541,7 +543,7 @@ set backspace=eol,start,indent
    "set cursorcolumn
    "set cursorline
     set foldcolumn=1
-    hi FoldColumn guifg=grey guibg=ctermbg
+    "hi FoldColumn guifg=grey guibg=ctermbg
 
 "    "gruvbox
 "    if (g:colors_name=="gruvbox")
@@ -1127,7 +1129,7 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set showcmd
 set nolist
-set listchars=tab:?\ ,extends:›,precedes:‹,nbsp:·,trail:·
+"set listchars=tab:?\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 
 if isdirectory($ROOTSYS.'/include')
