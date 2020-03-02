@@ -38,6 +38,7 @@ call minpac#init()
 " let g:NERDTreeWinSize = 40
 call minpac#add('scrooloose/nerdcommenter')
 call minpac#add('justinmk/vim-gtfo')
+let g:gtfo#terminals = { 'unix': 'terminator --working-dir=' }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TagList
@@ -113,13 +114,27 @@ call minpac#add('tpope/vim-vinegar')
 
 call minpac#add( 'SirVer/ultisnips')
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-set runtimepath+=~/.vim/UltiSnips/
-let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+"set runtimepath+="~/Dropbox/System Files/vim/.vim/UltiSnips"
+"let g:UltiSnipsSnippetsDir="~/Dropbox/System Files/vim/.vim/UltiSnips/"
+let g:UltiSnipsSnippetDirectories = [$HOME.'/Dropbox/System Files/vim/.vim/UltiSnips']
 
-let g:UltiSnipsExpandTrigger = "<c-c>"
-let g:UltiSnipsJumpForwardTrigger       =  "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger      =  "<c-k>"
+"let g:UltiSnipsExpandTrigger = "<c-c>"
+"let g:UltiSnipsJumpForwardTrigger       =  "<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger      =  "<c-k>"
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+
+let g:ycm_key_list_select_completion = ['<tab>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<s-tab>', '<Up>']
 
 
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -176,7 +191,6 @@ call minpac#add( 'vim-scripts/ingo-library') " needed by ConflictMotions
 
 call minpac#add('JuliaEditorSupport/julia-vim')
 call minpac#add('jceb/vim-orgmode')
-call minpac#add('vitalk/vim-simple-todo')
 call minpac#add('tpope/vim-repeat')
 call minpac#add('ludovicchabant/vim-gutentags')
 call minpac#add('gabrielelana/vim-markdown')
@@ -184,7 +198,7 @@ call minpac#add('junegunn/limelight.vim')
 call minpac#add('junegunn/rainbow_parentheses.vim')
 "call minpac#add('Yggdroot/indentLine')
 
-"call minpac#add('lervag/vimtex')
+call minpac#add('lervag/vimtex')
 call minpac#add('mbbill/undotree')
 "call minpac#add('ervandew/supertab')
 call minpac#add('tpope/vim-surround')
@@ -623,7 +637,8 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
     au FileType tex setlocal nocursorline
-
+    au FileType tex setlocal spell
+    au FileType tex call SetWrap()
 
     "vim latex variables
     " LaTeX (rubber) macro for compiling
@@ -641,7 +656,7 @@ augroup END
     "let g:Tex_CompileRule_pdf = 'latexmk -pdf'
     "let g:Tex_CompileRule_pdf = 'pdflatex -interactionmode=nonstop $*.tex'
     "let g:Tex_ViewRule_pdf = 'zathura'
-    "let g:tex_flavor = "latex"
+    let g:tex_flavor = "latex"
     "let g:Tex_MultipleCompileFormats = "dvi,pdf"
 
     if (system('uname -s') == "Darwin\n")
@@ -683,8 +698,6 @@ augroup END
 ""        let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
     elseif (has("win32"))
         let g:vimtex_view_method = "C:\\Program Files (x86)\\Adobe\\Reader 11.0\\Reader\\AcroRd32.exe"
-    else
-        let g:vimtex_view_method="zathura"
     endif
 
     "let g:vimtex_view_general_viewer = 'okular'
@@ -878,7 +891,7 @@ augroup END
         endif
     endfunction
 
-    call SetWrap()
+    call SetNoWrap()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "parenthesis match options
@@ -1090,6 +1103,7 @@ autocmd BufRead,BufNewFile *.md set filetype=markdown
 
 augroup markdown
 
+    autocmd!
     autocmd FileType markdown set nocursorcolumn
     autocmd FileType markdown set nocursorline
     autocmd FileType markdown call SetWrap()
