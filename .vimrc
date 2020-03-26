@@ -7,7 +7,7 @@
 " function-argument  a:    Function argument (only inside a function).
 " vim-variable       v:    Global, predefined by Vim.
 
-
+set noerrorbells
 set nocompatible
 set encoding=utf-8
 
