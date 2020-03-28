@@ -2,3 +2,4 @@ vim/bundle/*
 vim/pack/minpac/start
 *.swp
 *.swo
+.netrwhist
