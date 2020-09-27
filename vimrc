@@ -54,31 +54,40 @@
 
   call minpac#add('SirVer/ultisnips')
   call minpac#add('airblade/vim-gitgutter')
-  "call minpac#add('mhinz/vim-signify')
+ "call minpac#add('mhinz/vim-signify')
   call minpac#add('godlygeek/tabular')
   call minpac#add('junegunn/rainbow_parentheses.vim')
+  call minpac#add('junegunn/vim-peekaboo')
   call minpac#add('justinmk/vim-gtfo')
+  call minpac#add('MTDL9/vim-log-highlighting')
   call minpac#add('ludovicchabant/vim-gutentags')
   call minpac#add('mbbill/undotree')
   call minpac#add('scrooloose/nerdcommenter')
   call minpac#add('thirtythreeforty/lessspace.vim')
-  call minpac#add('tmhedberg/matchit')
-  call minpac#add('vim-airline/vim-airline')
-  call minpac#add('vim-airline/vim-airline-themes')
-  call minpac#add('vim-scripts/ConflictMotions')
-  call minpac#add('vim-scripts/CountJump') " needed by ConflictMotions
-  call minpac#add('vim-scripts/ingo-library') " needed by ConflictMotions
-  call minpac#add('vim-scripts/a.vim') " A to switch between .c and .h
+  call minpac#add('vim-scripts/a.vim')        " A to switch between .c and .h
   call minpac#add('vim-scripts/taglist.vim')
   call minpac#add('w0rp/ale')
  "call minpac#add('Yggdroot/indentLine')
  "call minpac#add('ervandew/supertab')
 
+
+  " Better % and * matching
+  call minpac#add('tmhedberg/matchit')
+  call minpac#add('andymass/vim-matchup')
+
+  " Airline
+  call minpac#add('vim-airline/vim-airline')
+  call minpac#add('vim-airline/vim-airline-themes')
+
+  " Conflict Motions
+  call minpac#add('vim-scripts/ConflictMotions') " ConflictMotions
+  call minpac#add('vim-scripts/CountJump')    " needed by ConflictMotions
+  call minpac#add('vim-scripts/ingo-library') " needed by ConflictMotions
+
   " FZF
   call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': '!./install --all'})
   call minpac#add('junegunn/fzf.vim')
   call minpac#add('pbogut/fzf-mru.vim')
-
 
   " Tim Pope
   call minpac#add('tpope/vim-eunuch')
@@ -134,11 +143,13 @@
 
   nnoremap <A-x>         :Commands<CR>
 
+  map <silent> <Space>bb :!~/bin/vhdl-beautify %<CR>
+
   map <silent> <Space>gg :Gstatus<CR>
   map <silent> <Space>gS :Gwrite<CR>
   map <silent> <Space>fr :FZFMru<CR>
   map <silent> <Space>b  :Buffers<CR>
-  map <silent> <Space>pp :Files ~/.dotfiles<CR>
+  map <silent> <Space>fp :Files ~/.dotfiles<CR>
 
   map <silent> <C-p> :GFiles<CR>
   map <silent> <C-o> :Files ~/<CR>
@@ -249,7 +260,7 @@
   "let g:UltiSnipsJumpBackwardTrigger      =  "<c-k>"
   let g:UltiSnipsExpandTrigger = "<nop>"
   let g:ulti_expand_or_jump_res = 0
-  function ExpandSnippetOrCarriageReturn()
+  function! ExpandSnippetOrCarriageReturn()
       let snippet = UltiSnips#ExpandSnippetOrJump()
       if g:ulti_expand_or_jump_res > 0
           return snippet
@@ -649,7 +660,8 @@
   set smartcase
 
   "escape clears highlighted search terms
-  nnoremap <ESC> :noh<CR><ESC>
+  " for some reason this causes terminal vim
+  "nnoremap <ESC> :noh<CR><ESC>
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " better soft wrapping
@@ -907,14 +919,13 @@
   set wildmenu
 
   " have ctags look in higher directories
-  :set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../tags,tags
+  :set tags=./tags,./../tags,./../../tags,./../../../tags,./../../../tags,./../../../../tags,tags
 
   " turn on ruler
   set ruler
 
   " Allow saving of files as sudo when I forgot to start vim using sudo.
   cmap w!! w !sudo tee > /dev/null %
-
 
   " set leader key
   ":let mapleader = ","
@@ -987,7 +998,6 @@
   set guioptions-=T  "remove toolbar
   "set guioptions-=m  "remove menu bar
 
-
   " Match Colors
   hi MatchParen cterm=bold ctermbg=none ctermfg=none
 
@@ -999,3 +1009,11 @@
   hi DiffChange   gui=none       guifg=NONE     guibg=NONE
   hi DiffDelete   gui=bold       guifg=#ff8080  guibg=#ffb0b0
   hi DiffText     gui=underline  guifg=NONE     guibg=#e5d5ac
+
+  augroup todo
+      autocmd!
+      autocmd Syntax * call matchadd(
+                  \ 'Debug',
+                  \ '\v\W\zs<(NOTE|INFO|IDEA|TODO|FIXME|CHANGED|XXX|BUG|HACK|TRICKY)>'
+                  \ )
+  augroup END
