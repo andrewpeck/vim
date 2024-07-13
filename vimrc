@@ -325,12 +325,12 @@ call plug#end()
   cmap w!! w !sudo tee > /dev/null %
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " XCI
+  " XDC
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  augroup xci
+  augroup xdc
     autocmd!
-    autocmd BufNewFile,BufReadPost *.xci set filetype=tcl
+    autocmd BufNewFile,BufReadPost *.xdc set filetype=tcl
   augroup END
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
