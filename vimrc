@@ -932,7 +932,7 @@ call plug#end()
   cmap w!! w !sudo tee > /dev/null %
 
   " set leader key
-  ":let mapleader = ","
+  let g:mapleader = "<\space>"
 
   " Change maximum number of tabs
   set tabpagemax=100
