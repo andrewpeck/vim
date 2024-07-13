@@ -321,6 +321,8 @@ call plug#end()
     autocmd BufNewFile,BufReadPost *.inc       set filetype=cpp
   augroup END
 
+  " Allow saving of files as sudo when I forgot to start vim using sudo.
+  cmap w!! w !sudo tee > /dev/null %
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " XCI
