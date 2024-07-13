@@ -452,7 +452,11 @@ call plug#end()
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
   set background=light
-  silent! colorscheme summerfruit256
+  if has("gui_running")
+    colorscheme base16-summerfruit-light
+  else
+    colorscheme PaperColor
+  endif
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "Formatting
