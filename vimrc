@@ -34,95 +34,89 @@
   endif
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Minpac
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-  packadd minpac
-
-  command! PackUpdate packadd minpac | source $MYVIMRC | redraw | call minpac#update()
-  command! PackClean  packadd minpac | source $MYVIMRC | call minpac#clean()
-
-  if !exists('*minpac#init')
-    finish
-  endif
-
-  call minpac#init()
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Packages
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  call minpac#add('SirVer/ultisnips')
-  call minpac#add('airblade/vim-gitgutter')
- "call minpac#add('mhinz/vim-signify')
-  call minpac#add('godlygeek/tabular')
-  call minpac#add('junegunn/rainbow_parentheses.vim')
-  call minpac#add('junegunn/vim-peekaboo')
-  call minpac#add('justinmk/vim-gtfo')
-  call minpac#add('MTDL9/vim-log-highlighting')
-  call minpac#add('ludovicchabant/vim-gutentags')
-  call minpac#add('mbbill/undotree')
-  call minpac#add('scrooloose/nerdcommenter')
-  call minpac#add('thirtythreeforty/lessspace.vim')
-  call minpac#add('vim-scripts/a.vim')        " A to switch between .c and .h
-  call minpac#add('vim-scripts/taglist.vim')
-  call minpac#add('w0rp/ale')
- "call minpac#add('Yggdroot/indentLine')
- "call minpac#add('ervandew/supertab')
+  call plug#begin()
+
+
+  Plug 'SirVer/ultisnips'
+  Plug 'airblade/vim-gitgutter'
+ "Plug 'mhinz/vim-signify'
+  Plug 'godlygeek/tabular'
+  Plug 'junegunn/rainbow_parentheses.vim'
+  Plug 'junegunn/vim-peekaboo'
+  Plug 'justinmk/vim-gtfo'
+  Plug 'MTDL9/vim-log-highlighting'
+ "Plug 'ludovicchabant/vim-gutentags'
+  Plug 'mbbill/undotree'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'thirtythreeforty/lessspace.vim'
+  Plug 'vim-scripts/a.vim'        " A to switch between .c and .h
+  Plug 'vim-scripts/taglist.vim'
+  Plug 'w0rp/ale'
+ "Plug 'Yggdroot/indentLine'
+ "Plug 'ervandew/supertab'
 
 
   " Better % and * matching
-  call minpac#add('tmhedberg/matchit')
-  call minpac#add('andymass/vim-matchup')
+  Plug 'tmhedberg/matchit'
+  Plug 'andymass/vim-matchup'
 
   " Airline
-  call minpac#add('vim-airline/vim-airline')
-  call minpac#add('vim-airline/vim-airline-themes')
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
 
   " Conflict Motions
-  call minpac#add('vim-scripts/ConflictMotions') " ConflictMotions
-  call minpac#add('vim-scripts/CountJump')    " needed by ConflictMotions
-  call minpac#add('vim-scripts/ingo-library') " needed by ConflictMotions
+  Plug 'vim-scripts/ConflictMotions' " ConflictMotions
+  Plug 'vim-scripts/CountJump'    " needed by ConflictMotions
+  Plug 'vim-scripts/ingo-library' " needed by ConflictMotions
 
   " FZF
-  call minpac#add('junegunn/fzf', {'dir': '~/.fzf', 'do': '!./install --all'})
-  call minpac#add('junegunn/fzf.vim')
-  call minpac#add('pbogut/fzf-mru.vim')
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'pbogut/fzf-mru.vim'
 
   " Tim Pope
-  call minpac#add('tpope/vim-eunuch')
-  call minpac#add('tpope/vim-fugitive')
-  call minpac#add('tpope/vim-repeat')
-  call minpac#add('tpope/vim-surround')
-  call minpac#add('tpope/vim-vinegar')
-  call minpac#add('tpope/vim-abolish')
- "call minpac#add('tpope/vim-sleuth')
+  Plug 'tpope/vim-eunuch'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-vinegar'
+  Plug 'tpope/vim-abolish'
+ "Plug 'tpope/vim-sleuth'
 
   " Languages
-  call minpac#add('vhda/verilog_systemverilog.vim')
-  call minpac#add('vim-scripts/VIP') " Special copy paste for VHDL
-  call minpac#add('lervag/vimtex')
-  call minpac#add('JuliaEditorSupport/julia-vim')
-  call minpac#add('gabrielelana/vim-markdown')
-  call minpac#add('jceb/vim-orgmode')
+  Plug 'vhda/verilog_systemverilog.vim'
+  Plug 'vim-scripts/VIP' " Special copy paste for VHDL
+  Plug 'lervag/vimtex'
+  Plug 'JuliaEditorSupport/julia-vim'
+  Plug 'gabrielelana/vim-markdown'
+  Plug 'jceb/vim-orgmode'
 
  "Colorschemes
-  call minpac#add('NLKNguyen/papercolor-theme')
-  call minpac#add('chriskempson/base16-vim')
-  call minpac#add('dmcgrady/vim-lucario')
-  call minpac#add('dracula/vim')
-  call minpac#add('guns/jellyx.vim')
-  call minpac#add('zeis/vim-kolor')
-  call minpac#add('lifepillar/vim-solarized8')
-  call minpac#add('morhetz/gruvbox')
-  call minpac#add('patstockwell/vim-monokai-tasty')
-  call minpac#add('iCyMind/NeoSolarized')
+  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'chriskempson/base16-vim'
+  Plug 'dmcgrady/vim-lucario'
+  Plug 'dracula/vim'
+  Plug 'guns/jellyx.vim'
+  Plug 'zeis/vim-kolor'
+  Plug 'lifepillar/vim-solarized8'
+  Plug 'morhetz/gruvbox'
+  Plug 'patstockwell/vim-monokai-tasty'
+  Plug 'iCyMind/NeoSolarized'
 
-  if (!(has("win32")))
-    call minpac#add('Valloric/YouCompleteMe')
-    "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
-    "map <silent> <Leader>f :YcmCompleter FixIt<CR>
-  endif
+  Plug 'liuchengxu/vim-which-key'
+
+  nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
+
+  ""if (!(has("win32")))
+  ""  Plug 'Valloric/YouCompleteMe'
+  ""  "let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+  ""  "map <silent> <Leader>f :YcmCompleter FixIt<CR>
+  ""endif
+
+call plug#end()
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " GTFO
