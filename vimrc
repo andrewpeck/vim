@@ -155,6 +155,10 @@ call plug#end()
   map <silent> <Leader>rg :Rg<CR>
   map <silent> <Leader>b  :Buffers<CR>
 
+  " M-q to fill paragraph a la emacs
+  nnoremap q vipgq
+  vnoremap q vipgq
+
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " FZF
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
