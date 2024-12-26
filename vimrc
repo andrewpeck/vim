@@ -55,9 +55,6 @@
   Plug 'vim-scripts/a.vim'        " A to switch between .c and .h
   Plug 'vim-scripts/taglist.vim'
   Plug 'w0rp/ale'
- "Plug 'Yggdroot/indentLine'
- "Plug 'ervandew/supertab'
-
 
   " Better % and * matching
   Plug 'tmhedberg/matchit'
@@ -846,24 +843,9 @@ call plug#end()
   augroup END
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " ROOT
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-  augroup root
-    autocmd!
-    autocmd BufNewFile,BufReadPost *.C set filetype=cpp
-  augroup END
-
-  if isdirectory($ROOTSYS.'/include')
-    set path+=$ROOTSYS/include
-  endif
-
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Ale
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-  let g:ale_cpp_clang_options='-std=c++14 -Wall -I/Users/andrew/root/include'
-  let g:ale_cpp_clangtidy_options='-std=c++14 -Wall -I$ROOTSYS/include'
   let g:ale_linters = { 'cpp': ['clang']}
   let g:ale_sign_error = '✘'
   let g:ale_sign_warning = '⚠'
