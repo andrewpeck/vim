@@ -404,12 +404,15 @@ call plug#end()
   nnoremap <F5> :UndotreeToggle<cr>
 
   "nmap <silent> <Leader>u :UndotreeToggle<CR>
-
   set undofile
+
+  set undodir=~/.vim/undodir
   if has("win32")
-    set undodir=C:/Dropbox/.vim/undodir
-  else
-    set undodir=~/Dropbox/.vim/undodir
+    set undodir=C:/.vim/undodir
+  endif
+
+  if !isdirectory(&undodir)
+    call mkdir(&undodir, 'p')  " 'p' flag creates parent directories if needed
   endif
 
   set history=2000
@@ -770,6 +773,9 @@ call plug#end()
     set backupdir=$HOME/.vim/tmp//
   endif
 
+  if !isdirectory(&backupdir)
+    call mkdir(&backupdir, 'p')  " 'p' flag creates parent directories if needed
+  endif
 
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   "  Produce header guard when creating new header files
